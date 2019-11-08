@@ -5,6 +5,7 @@
   "main": "gulpfile.js",
   "dependencies": {
     "gulp-ruby-sass": "^2.0.3",
+    "live2d-widget-model-haru": "^1.0.5",
     "live2d-widget-model-hijiki": "^1.0.5"
   },
   "devDependencies": {
