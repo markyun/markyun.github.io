@@ -1,6 +1,6 @@
 name: Markyun
 description: "Front-End Engineer"
-meta_description: "爱骑行、爱摄影、爱阅读的理想青年，前端工程师"
+meta_description: "前端开发工程师"
 
 aboutPage: true
 paginate: 30
@@ -16,7 +16,7 @@ disqus_shortname: 'markyungithub'
 # Details for the RSS feed generator
 url:            'http://markyun.github.io'
 author:         'markyun'
-authorTwitter:  'majinyun0802'
+authorTwitter:  'markyun'
 
 permalink:       /:year/:title/
 
@@ -39,3 +39,20 @@ defaults:
             type: drafts
         values:
             layout: post
+
+live2d:
+  enable: true
+  scriptFrom: local
+  pluginRootPath: live2dw/
+  pluginJsPath: lib/
+  pluginModelPath: assets/
+  tagMode: false
+  debug: false
+  model:
+    use: live2d-widget-model-hijiki
+  display:
+    position: right
+    width: 150
+    height: 300
+  mobile:
+    show: true

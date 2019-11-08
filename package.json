@@ -4,7 +4,8 @@
   "description": "markyun.github.io",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp-ruby-sass": "^2.0.3"
+    "gulp-ruby-sass": "^2.0.3",
+    "live2d-widget-model-hijiki": "^1.0.5"
   },
   "devDependencies": {
     "gulp": "^3.9.0"
