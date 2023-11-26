@@ -1,0 +1,75 @@
+.archive {
+    width: 100%;
+
+    .archive-content {
+        width: 60rem;
+        margin-left: auto;
+        margin-right: auto;
+
+        @media only screen and (max-width: 768px) {
+            width: 28rem;
+        }
+    }
+}
+
+.archive-posts {
+    width: 100%;
+    font-size: 1rem;
+}
+
+.archive-year {
+    margin-top: 3rem;
+    @media only screen and (max-width: 768px) {
+        margin-top: 1rem;
+    }
+}
+
+.archive-month {
+    display: flex;
+    align-items: flex-start;
+    margin-top: -1.5rem;
+    margin-bottom: -1.5rem;
+
+    @media only screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.archive-month-header {
+    margin: 2rem 0;
+    width: 20rem;
+    @media only screen and (max-width: 768px) {
+        flex-direction: column;
+        margin: 1rem 0;
+    }
+}
+
+.archive-entry {
+    position: relative;
+    padding: 1rem;
+    margin: 1rem 0;
+
+    @media only screen and (max-width: 768px) {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.archive-entry-title {
+    margin: 0.5rem 0;
+    font-weight: 400;
+}
+
+.archive-count,
+.archive-meta {
+    color: $gray-archives-meta;
+    font-size: 1.5rem;
+}
+
+.archive-link {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}

@@ -1,0 +1,21 @@
+<div class="home">
+    <div class="info">
+        <div class="intro">
+            <h1>{{ .Site.Params.author }}</h1>
+            <small>{{ .Site.Params.authorDescription | markdownify }}</small>
+            <p>{{ .Site.Params.info | markdownify }}</p>
+        </div>
+
+        {{ if .Site.Params.avatarURL }}
+        {{ with .Site.Params.avatarURL }}
+        <div class="avatar"><img src="{{ . | relURL }}" alt="avatar"></div>
+        {{ end }}
+        {{ end }}
+    </div>
+
+    <div class="featured">
+        {{ partial "home/featured.html" . }}
+    </div>
+
+</div>
+

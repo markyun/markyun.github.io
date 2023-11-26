@@ -1,0 +1,65 @@
+// Color system
+
+$white:    #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black:    #000;
+
+
+// Colors
+$bg-color: white;
+$fg-color: #212121;
+$alt-bg-color: #e0e0e0;
+$alt-fg-color: #000;
+$darker-alt-bg-color: #ccc;
+$link-color: black;
+$font-highlight-color: #ed4759;
+$font-highlight-bg-color: #ededeb;
+$code-bg-color-light: #f7f6f3;
+$gray-archives-meta: #6C6C6C;
+$code-bg-color-dark: #0e1116;
+$code-copy-button: #e952a6;
+
+// Dark colors
+$bg-color-dark: #212121;
+$fg-color-dark: #dadada;
+$alt-bg-color-dark: #424242;
+$alt-fg-color-dark: #dadada;
+$lighter-alt-bg-color-dark: #4f4f4f;
+$link-color-dark: #42a5f5;
+
+
+$body-bg-dark: #181a1b;
+$body-overlay-dark: darken($body-bg-dark, 2.5%);
+
+$border-dark: $gray-800;
+$body-color-dark: $gray-300;
+$dots-dark: darken($body-color-dark, 50%);
+
+$color-dark-cyan: #84ebd9;
+$color-dark-blue: #6ab0e5;
+$color-dark-blue-200: #1565c0;
+$color-dark-purple: #d35af7;
+$color-dark-yellow: #fdec6d;
+$color-dark-pink: #ed6d91;
+$color-dark-pink-200: #dd556a;
+$color-dark-pink-300: #e952a6;
+$color-dark-red: #eb4344;
+$color-dark-orange: #f1964f;
+$color-dark-code-bg: #202020;
+
+
+// Fonts
+$font-family: "LXGW WenKai", sans-serif;
+$code-font-family: SFMono-Regular,
+Consolas,
+Liberation Mono,
+Menlo,
+monospace;

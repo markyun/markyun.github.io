@@ -1,0 +1,33 @@
+.tags {
+  width: 100%;
+
+  .tags-list {
+    width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  .tags-list li {
+    display: inline-block;
+    font-weight: 500;
+    margin-top: 3rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+
+    @media only screen and (max-width: 768px) {
+      margin-top: 1rem;
+    }
+  }
+
+  .tags-list a {
+    display: block;
+    padding: 3px 10px;
+    background: $gray-200;
+    border-radius: 0.5rem;
+    text-decoration: none;
+  }
+}

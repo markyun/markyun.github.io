@@ -1,0 +1,155 @@
+[data-dark-mode] body .navigation .navigation-list .navigation-dark .toggle-light {
+  display: block;
+  color: $body-color-dark;
+}
+
+[data-dark-mode] body .navigation .navigation-list .navigation-dark .toggle-light:hover {
+  color: $color-dark-yellow;
+}
+
+[data-dark-mode] body .navigation .navigation-list .navigation-dark .toggle-dark {
+  display: none;
+}
+
+[data-dark-mode] body {
+  background: $body-bg-dark;
+  color: $body-color-dark;
+}
+
+[data-dark-mode] body a {
+  color: $body-color-dark;
+}
+
+[data-dark-mode] body a.text-body {
+  color: $body-color-dark;
+}
+
+[data-dark-mode] body .navigation-link:hover,
+[data-dark-mode] body .navigation-link:focus,
+[data-dark-mode] body .navigation-brand:hover,
+[data-dark-mode] body .navigation-brand:focus {
+  color: $body-color-dark;
+}
+
+[data-dark-mode] h1,
+[data-dark-mode] h2,
+[data-dark-mode] h3,
+[data-dark-mode] h4,
+[data-dark-mode] h5,
+[data-dark-mode] h6 {
+  color: $body-color-dark;
+
+  .heading-link {
+    color: $body-color-dark;
+  }
+}
+
+[data-dark-mode] code {
+  background-color: $color-dark-code-bg;
+}
+
+[data-dark-mode] .highlight>pre,
+[data-dark-mode] .highlight>div {
+  background-color: $color-dark-code-bg !important;
+}
+
+[data-dark-mode] pre {
+
+  code {
+    display: inline-block;
+    background-color: $color-dark-code-bg;
+    color: inherit;
+  }
+}
+
+[data-dark-mode] blockquote {
+  border-left: 3px solid $body-color-dark !important;
+}
+
+[data-dark-mode] body .blog-card {
+  background: $body-bg-dark;
+}
+
+[data-dark-mode] body .card {
+  background: $gray-900;
+
+  p {
+    color: $gray-400;
+  }
+}
+
+[data-dark-mode] body .blog-toc {
+  a:hover {
+    color: $body-color-dark;
+  }
+}
+
+[data-dark-mode] .top-link {
+  background: $border-dark;
+}
+
+[data-dark-mode] .top-link svg {
+  color: $body-color-dark;
+}
+
+[data-dark-mode] .footer a:hover,
+[data-dark-mode] .top-link:hover {
+  background: $body-overlay-dark;
+}
+
+[data-dark-mode] .archive-count,
+[data-dark-mode] .archive-meta {
+  color: $gray-300;
+  font-size: 1.5rem;
+}
+
+
+[data-dark-mode] .blog-single .related-resources {
+  border-top: 1px solid $body-color-dark;
+}
+
+[data-dark-mode] body .language-item a:hover {
+  color: $body-color-dark;
+}
+
+[data-dark-mode] .blog-content {
+  a {
+    box-shadow: 0 0;
+    text-decoration: none;
+    color: $color-dark-blue;
+  }
+}
+
+[data-dark-mode] .home .info .intro {
+  a {
+    box-shadow: 0 0;
+    text-decoration: none;
+    color: $color-dark-blue;
+  }
+}
+
+[data-dark-mode] .navigation .navigation-list {
+
+  @media only screen and (max-width: 768px) {
+    background-color: $body-bg-dark;
+    border-top: solid 2px $gray-600;
+    border-bottom: solid 2px $gray-600;
+  }
+
+  .menu-separator span {
+    color: $gray-200;
+  }
+}
+
+[data-dark-mode] .navigation .menu-button {
+  @media only screen and (max-width: 768px) {
+
+    span {
+      background: $body-color-dark;
+    }
+  }
+}
+
+[data-dark-mode] .tags .tags-list a {
+  background: $gray-800;
+}

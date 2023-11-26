@@ -1,0 +1,39 @@
+{{ define "content" }}
+<div class="guestbook">
+    <h1>{{ .Site.Params.sponsors.title }}</h1>
+    <p>{{ .Site.Params.sponsors.description }}</p>
+
+    {{ if .Site.Params.sponsors.buymeacoffee.enable }}
+    <div class="sponsors-buymeacoffee-icon">
+        <a href="{{.Site.Params.sponsors.buymeacoffee.url}}"><img
+            src="{{.Site.Params.sponsors.buymeacoffee.buttom_api}}" /></a>
+    </div>
+
+    <div class="sponsors-buymeacoffee-qr">
+        <a><img src="{{.Site.Params.sponsors.buymeacoffee.qr}}" /></a>
+    </div>
+    <div class="sponosrs-text">Buy me a coffee</div>
+    {{ end }}
+
+    {{ if .Site.Params.sponsors.wechat.enable }}
+    <div class="sponsors-wechat-qr">
+        <a><img src="{{.Site.Params.sponsors.wechat.qr}}"></a>
+    </div>
+    <div class="sponosrs-text">微信支付</div>
+    {{ end }}
+
+    {{ if .Site.Params.sponsors.alipay.enable }}
+    <div class="sponsors-alipay-qr">
+        <a><img src="{{.Site.Params.sponsors.alipay.qr}}"></a>
+    </div>
+    <div class="sponosrs-text">支付宝</div>
+    {{ end }}
+
+    <div class="sponsors-list">
+        <h1>Sponsor List:</h1>
+        {{ .Content }}
+    </div>
+    <p>{{ .Params.sponsors_desc }}</p>
+
+</div>
+{{ end }}

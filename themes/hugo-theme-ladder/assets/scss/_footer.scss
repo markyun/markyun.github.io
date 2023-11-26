@@ -1,0 +1,42 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8rem;
+  width: 100%;
+  padding-bottom: 1rem;
+  font-size: 80%;
+  margin-top: auto;
+}
+
+.top-link {
+  visibility: hidden;
+  position: fixed;
+  bottom: 5rem;
+  right: 5rem;
+  z-index: 99;
+  background: $gray-100;
+  width: 4rem;
+  height: 4rem;
+  padding: 0.75rem;
+  border-radius: 4rem;
+  transition: visibility 0.5s, opacity 0.8s linear;
+
+  @media only screen and (max-width: 768px) {
+    right: 2rem;
+  }
+}
+
+.top-link:focus,
+#theme-toggle:focus {
+  outline: 0;
+}
+
+.top-link:hover {
+  background: $white;
+}
+
+.top-link {
+  font-size: 80%;
+  color: $fg-color;
+}

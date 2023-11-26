@@ -1,0 +1,35 @@
+[blog]
+one = "文章"
+other = "文章"
+
+[art]
+one = "生活"
+other = "生活"
+
+[tags]
+one = "分类"
+other = "分类"
+
+[archive]
+one = "历史文章"
+other = "历史文章"
+
+[series]
+one = "系列文章"
+other = "系列文章"
+
+[reading_time]
+one = "1 分钟"
+other = "{{ .Count }} 分钟"
+
+[word_count]
+one = "字"
+other = "{{ .Count }} 字"
+
+[related_resources]
+one = "相关系列文章推荐"
+other = "相关系列文章推荐"
+
+[featured_posts]
+one = "推荐阅读"
+other = "推荐阅读"

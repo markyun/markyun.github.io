@@ -1,0 +1,157 @@
+baseURL: "https://markyun.github.io"
+title: ASCII-ART
+theme: hugo-theme-ladder
+license: MIT
+licenselink: "https://github.com/LICENSE"
+description: "ASCII-ART Blog"
+homepage: "https://markyun.github.io"
+ignoreErrors: ["error-remote-getjson"]
+defaultContentLanguage: "zh"
+googleAnalytics: G-4WXJ5TEK2S
+paginate: 10
+hasCJKLanguage: true
+copyright: "2023 ASCII-ART All rights reserved"
+Author:
+    name: "ASCII-ART"
+    email: "asciiart007@gmail.com"
+menu:
+    main:
+        - name: 文章
+          url: /blog
+          weight: 1
+        - name: 生活
+          url: /art
+          weight: 2
+        - name: 标签
+          url: /tags
+          weight: 3
+        - name: 归档
+          url: /archives
+          weight: 3
+        - name: 留言板
+          url: /guestbook
+          weight: 4
+        - name: 统计
+          url: https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli
+          weight: 5
+params:
+    brand: HOME
+    avatarURL: /images/avatar.png
+    author: ASCII-ART
+    authorDescription: ASCII-ART blog
+    info: ASCII-ART a clean, simple but beautiful blog
+    favicon: /images/avatar.png
+    options:
+        showDarkMode: true
+        enableImgZooming: true
+        enableMultiLang: true
+        showMetaTags: true
+    darkModeTheme: data-dark-mode
+    sponsors:
+        title: Sponsors
+        description: Support me by becoming a sponsor
+        # buymeaCoffee:
+        #     enable: true
+        #     url: https://www.buymeacoffee.com/iguangzhengli
+        #     buttom_api: https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=iguangzhengli&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff
+        #     qr: https://storage.guangzhengli.com/images/buymeacoffee_sponsors.png
+        wechat:
+            enable: false
+            # qr: https://storage.guangzhengli.com/images/alipay_sponsors.jpeg
+        alipay:
+            enable: false
+            # qr: https://storage.guangzhengli.com/images/weixin_sponsors.jpeg
+    comments:
+        giscus:
+            enable: true
+            repo: guangzhengli/hugo-ladder-exampleSite
+            repo_id: R_kgDOHyVOjg
+            category: Announcements
+            category_id: DIC_kwDOHyVOjs4CQsH7
+            mapping: pathname
+            position: top
+            lang: en # pick a language from https://github.com/giscus/giscus/tree/main/locales
+        utteranc:
+            enable: false
+            repo: guangzhengli/blog-comments
+            issueTerm: pathname
+    analytics:
+        google:
+            SiteVerificationTag: xxx
+        umami:
+            enable: true
+            website_id: 2320eaa6-a90b-471c-b6ca-e79dadde8c4c
+            url: https://umami-ochre-nu.vercel.app/hugo-ladder.js
+    guestbook:
+        title: Guestbook
+        description: Leave a comment below. It could be anything –- question, appreciation, information, or even humor.
+    social:
+        - name: GitHub
+          pre: >-
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          url: "https://github.com/markyun"
+        - name: Dashboard
+          pre: >-
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          url: "https://umami-ochre-nu.vercel.app/share/R1lHz7QY/hugo-ladder-exampleSite"
+languages:
+    zh:
+        languageName: 中
+        author: asciiart
+        authorDescription: 一个美观，快速并且专注于阅读的 asciiart blog
+        info: asciiart blog 记录自己的思考并且提高自己的影响力
+        guestbook:
+            title: 留言板
+            description: 您的评论，会让该网站更精彩！
+        menu:
+            main:
+                - name: 文章
+                  url: /blog
+                  weight: 1
+                - name: 生活
+                  url: /art
+                  weight: 2
+                - name: 标签
+                  url: /tags
+                  weight: 3
+                - name: 归档
+                  url: /archives
+                  weight: 3
+                - name: 留言板
+                  url: /guestbook
+                  weight: 4
+                - name: 统计
+                  url: https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli
+                  weight: 5
+    en:
+        languageName: EN
+        author: asciiart
+        authorDescription: 一个美观，快速并且专注于阅读的 asciiart blog
+        info: asciiart blog 记录自己的思考并且提高自己的影响力
+        guestbook:
+            title: 留言板
+            description: 您的en评论，会让该网站更精彩！
+        menu:
+            main:
+                - name: Blog
+                  url: /blog
+                  weight: 1
+                - name: Art
+                  url: /art
+                  weight: 2
+                - name: Tags
+                  url: /tags
+                  weight: 3
+                - name: Archive
+                  url: /archives
+                  weight: 4
+                - name: Guest
+                  url: /guestbook
+                  weight: 5
+                - name: Monitor
+                  url: https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli
+                  weight: 6
+
+taxonomies:
+    series: series
+    tag: tags
