@@ -7,10 +7,13 @@ description: "ASCII-ART Blog"
 homepage: "https://markyun.github.io"
 ignoreErrors: ["error-remote-getjson"]
 defaultContentLanguage: "zh"
-# googleAnalytics: G-4WXJ5TEK2S
+languages: "zh"
+googleAnalytics: G-GCQ46F04MN
 paginate: 10
-# Hugo会自动提取文章的前70个字符作为摘要
+enableEmoji: true
+# Hugo 会自动提取文章的前 70 个字符作为摘要
 hasCJKLanguage: true
+summaryLength: 70
 copyright: "2023 ASCII-ART All rights reserved"
 Author:
     name: "ASCII-ART"
@@ -28,10 +31,13 @@ menu:
           weight: 3
         - name: 归档
           url: /archives
-          weight: 3
+          weight: 4
+        # - name: 专题
+        #   url: /series
+        #   weight: 5
         - name: 留言板
           url: /guestbook
-          weight: 4
+          weight: 5
         # - name: 统计
         #   url: https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli
         #   weight: 5
@@ -65,16 +71,17 @@ params:
     comments:
         giscus:
             enable: true
-            repo: guangzhengli/hugo-ladder-exampleSite
-            repo_id: R_kgDOHyVOjg
+            repo: markyun/markyun.github.io
+            repo_id: R_kgDOKyM4fA
             category: Announcements
-            category_id: DIC_kwDOHyVOjs4CQsH7
+            category_id: DIC_kwDOKyM4fM4CbSGO
             mapping: pathname
             position: top
-            lang: en # pick a language from https://github.com/giscus/giscus/tree/main/locales
+            lang: "zh-CN" # pick a language from https://github.com/giscus/giscus/tree/main/locales
+            # utteranc 和 giscus  只能二选一 enable: false 需将另外的一个 enable 设置成 false。
         utteranc:
             enable: false
-            repo: guangzhengli/blog-comments
+            repo: markyun/blog-comments
             issueTerm: pathname
     analytics:
         google:

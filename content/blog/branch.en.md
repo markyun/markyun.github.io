@@ -3,7 +3,7 @@ title: Git仓库的分支(Branch)specification
 date: 2018-11-27 19:31:30
 tags: ["Git", "code", "specification"]
 series: ["Specification"]
-category: ["Branch"]
+category: ["blog"]
 featured: true
 ---
 

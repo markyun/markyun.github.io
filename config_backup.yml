@@ -7,6 +7,7 @@ description: "ASCII-ART Blog"
 homepage: "https://markyun.github.io"
 ignoreErrors: ["error-remote-getjson"]
 defaultContentLanguage: "zh"
+languages: "zh"
 googleAnalytics: G-4WXJ5TEK2S
 paginate: 10
 hasCJKLanguage: true

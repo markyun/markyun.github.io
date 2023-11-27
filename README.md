@@ -2,9 +2,7 @@
 
 <h2 align=center>Web Developer/ Photog/ Work at NanJing</h2>
 
-<h4 align=center>本站内容: 🌈 前端| 📰 文章 | 🌐 多语言 | 🌙 暗色模式 | 📱 移动端适配</h4>
-
-本博客主题来源于 [hugo-ladder](https://github.com/guangzhengli/hugo-ladder-exampleSite) , 中文即阶梯的含义。读书为输入，写作为输出，都是获取知识的阶梯。模板文档中包括了 hugo 所有的安装流程信息，例如如何免费构建独立的博客网站，如何。你可以通过直接访问网站，来获得原生体验。
+本博客主题来源于 [hugo-ladder](https://github.com/guangzhengli/hugo-ladder-exampleSite) , 中文即阶梯的含义。读书为输入，写作为输出，都是获取知识的阶梯。模板文档中包括了 hugo 所有的安装流程信息，例如如何免费构建独立的博客网站。本站适配了🌐 多语言 | 🌙 暗色模式 | 📱 移动端适配，你可以通过直接访问网站，来获得原生体验。
 
 ### 基础使用
 
@@ -14,21 +12,23 @@
 
     启动博客: hugo server -D
 
+    编译博客：hugo -D
+
 
     ---
-    title: Git仓库的分支(Branch)规范
+    title: Git 仓库的分支 (Branch) 规范
     date: 2018-11-27 19:31:30
     tags: ["Git", "代码管理", "规范"]
-    series: ["Specification"]
-    category: ["Branch"]
+    series: ["代码管理"]
+    category: ["blog"]
     featured: true
     ---
 
     title 文章题目
     date 发布日期
-    tags 标签分类
-    series 系列文章，会在下方推荐阅读中推荐同系列文章
-    category 分类
+    tags 标签分类，用于描述文章的主题、关键词。通过标签，可以根据兴趣和需求，快速找到相关的文章
+    series 系列文章，用于将同一系列相关的文章组织在一起。会在下方推荐阅读中推荐同系列文章
+    category 类别分类、比如技术、生活、旅行等
     featured 是否在主页面中展示，true or false
 
 ## 最小配置
@@ -52,6 +52,8 @@ params:
     showDarkMode: true # is show dark mode button
     enableMultiLang: true # is show multi language button
 ```
+
+新的图标可以通过修改配置文件添加，params.social 字段标明 名称，图标，自定义地址，图标可以在这个网站找到 feathericons.com。
 
 Modifying the default configuration. Then push it to your repository.
 
