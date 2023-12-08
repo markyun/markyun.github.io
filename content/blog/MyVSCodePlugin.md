@@ -14,68 +14,72 @@ featured: true
 ## 我安装的 VS Code 插件 (**Extensions**)
 
 ### 常规类
-> vscode-fileheader、
-> Auto Close Tag,
-> Auto Rename Tag ,
-> CSSComb、
-> Prettier 、
-> CSSRem (px to rem & rpx & vw ),
-> Remove Comments,
-> Live Server,
-> Color Highlight ,
-> GitLens 代码编辑历史、
-> Git History  历史记录并搜索提交、消息、分支、
-> Import Cost（查看导入包的大小）、
-> CSS PEEK（类名与样式关联）、
-> Colorize  可视化 CSS 颜色
-> TODO Highlight,
-> Svg Preview,
-> Excel Viewer,
-> filesize、
-> Open in Browser,
-> toggle-upper-case、
-> indent-rainbow（代码缩进高亮）、
-> Better Comments  (Comment Highlighting)
+
+    > vscode-fileheader、
+    > Auto Close Tag,
+    > Auto Rename Tag ,
+    > CSSComb、
+    > Prettier 、
+    > CSSRem (px to rem & rpx & vw ),
+    > Remove Comments,
+    > Live Server,
+    > Color Highlight ,
+    > GitLens 代码编辑历史、
+    > Git History  历史记录并搜索提交、消息、分支、
+    > Import Cost（查看导入包的大小）、
+    > CSS PEEK（类名与样式关联）、
+    > Colorize  可视化 CSS 颜色
+    > TODO Highlight,
+    > Svg Preview,
+    > Excel Viewer,
+    > filesize、
+    > Open in Browser,
+    > toggle-upper-case、
+    > indent-rainbow（代码缩进高亮）、
+    > Better Comments  (Comment Highlighting)
 
 
 ### 纠正类
-> AutoCorrect   用于「自动纠正」或「检查并建议」文案、给 CJK（中文、日语、韩语）与英文混写的场景，补充正确的空格，同时尝试以安全的方式自动纠正标点符号
-> Code Spell Checker（检测单词错误）、
-> Bracket Pair Colorizer  括号高亮配对
-> Error Lens
+
+    > AutoCorrect   用于「自动纠正」或「检查并建议」文案、给 CJK（中文、日语、韩语）与英文混写的场景，补充正确的空格，同时尝试以安全的方式自动纠正标点符号
+    > Code Spell Checker（检测单词错误）、
+    > Bracket Pair Colorizer  括号高亮配对
+    > Error Lens
 
 
 
 ### 工具类
-> Turbo Console Log  无需手动添加日志。通过单击一个按钮添加控制台日志、
-> Remove Comments  删除代码中的所有注释。
-> Regex Previewer,
-> CodeSnap（生成代码选中图片 Take beautiful screenshots of your code in VS Code!）、
-> Markdown Preview Enhanced,
-> Material  icons ,
-> File Nesting Updater,
->
+
+    > Turbo Console Log  无需手动添加日志。通过单击一个按钮添加控制台日志、
+    > Remove Comments  删除代码中的所有注释。
+    > Regex Previewer,
+    > CodeSnap（生成代码选中图片 Take beautiful screenshots of your code in VS Code!）、
+    > Markdown Preview Enhanced,
+    > Material  icons ,
+    > File Nesting Updater,
+    >
 
 
 ### 主动提示
 
-> Path Intellisense,
-> cssModules、
-> Parameter Hints（入参格式提示）、
-> Quokka.js
+    > Path Intellisense,
+    > cssModules、
+    > Parameter Hints（入参格式提示）、
+    > Quokka.js
 
 
 ### AI 类工具
 
-> Tabnine 、
-> GitHub Copilot ,
-> Codeium 、
-> Time Master 分析编程时间
+    > Tabnine 、
+    > GitHub Copilot、
+    > Codeium 、
+    > Time Master 分析编程时间
 
 
 ### 主题 (Theme)
-> Monokai Pro（注册 key 输入 email 地址为 id@chinapyg.com，enter 后，再输入 key:  d055c-36b72-151ce-350f4-a8f69）、
-> Peacock 打开多个 VS Code 实例显示不同颜色
+
+    > Monokai Pro（注册 key 输入 email 地址为 id@chinapyg.com，enter 后，再输入 key:  d055c-36b72-151ce-350f4-a8f69）、
+    > Peacock 打开多个 VS Code 实例显示不同颜色
 
 
 
@@ -425,9 +429,19 @@ import { Sortable } from './Dndkit/Sortable';
 export { IconFont, Menus, Sortable };
 ```
 
-**想要设置 alias 后，就能在编辑器中 正确编译和点击跳转，其实只有两处需要配置：webpack.resolve 和 tsconfig.json 路径映射的关系。**
+**想实现设置 alias 后，就能在编辑器中正确编译和点击跳转，其实只需要两处配置：**
+
+> webpack.resolve 和 tsconfig.json 路径映射的关系
+
 **其中 tsconfig.json 中的 paths 主要用于告诉 TypeScript 编译器如何解析模块导入的路径。**
-**而 webpack.resolve.alias 则用于告诉 webpack 构建过程中如何解析模块导入的路径。这两者的分别配合，确保在开发过程中和构建过程中都能正确地解析模块导入的路径，从而实现代码编译和代码跳转的成功使用。**
+
+**而 webpack.resolve.alias 则用于告诉 webpack 构建过程中如何解析模块导入的路径。**
+
+**这两者的分别配合，确保在开发过程中和构建过程中都能正确地解析模块导入的路径，从而实现代码编译和代码跳转的成功使用。**
+
+
+
+
 1、项目根目录 需要有 tsconfig.json 配置文件，它是用于告诉 TypeScript 编译器如何 解析代码中的模块导入的路径。
 ```json
 {
