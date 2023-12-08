@@ -1,6 +1,6 @@
 ---
 title: 我的 VS Code 常用配置
-date: 2023-11-8 10:31:37
+date: 2023-11-27 19:31:30
 tags: ["Extensions", "vscode", "alias and tsconfig"]
 series: [""]
 category: ["blog"]

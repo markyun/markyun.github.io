@@ -1,6 +1,6 @@
 ---
-title:  My VS Code Configuration
-date: 2023-11-8 10:31:37
+title: My VS Code Configuration
+date: 2023-11-27 19:31:30
 tags: ["Extensions", "vscode", "alias and tsconfig"]
 series: [""]
 category: ["blog"]
