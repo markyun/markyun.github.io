@@ -15,31 +15,31 @@ featured: true
 
 ### 常规类
 > vscode-fileheader、
-> Auto Close Tag、
-> Auto Rename Tag 、
+> Auto Close Tag,
+> Auto Rename Tag ,
 > CSSComb、
 > Prettier 、
-> CSSRem （px to rem & rpx & vw ）、
-> Remove Comments、
-> Live Server、
-> Color Highlight 、
+> CSSRem (px to rem & rpx & vw ),
+> Remove Comments,
+> Live Server,
+> Color Highlight ,
 > GitLens 代码编辑历史、
 > Git History  历史记录并搜索提交、消息、分支、
 > Import Cost（查看导入包的大小）、
 > CSS PEEK（类名与样式关联）、
 > Colorize  可视化 CSS 颜色
-> TODO Highlight、
-> Svg Preview、
-> Excel Viewer、
+> TODO Highlight,
+> Svg Preview,
+> Excel Viewer,
 > filesize、
-> Open in Browser、
+> Open in Browser,
 > toggle-upper-case、
 > indent-rainbow（代码缩进高亮）、
 > Better Comments  (Comment Highlighting)
 
 
 ### 纠正类
-> AutoCorrect   用于「自动纠正」或「检查并建议」文案 、给 CJK（中文、日语、韩语）与英文混写的场景，补充正确的空格，同时尝试以安全的方式自动纠正标点符号
+> AutoCorrect   用于「自动纠正」或「检查并建议」文案、给 CJK（中文、日语、韩语）与英文混写的场景，补充正确的空格，同时尝试以安全的方式自动纠正标点符号
 > Code Spell Checker（检测单词错误）、
 > Bracket Pair Colorizer  括号高亮配对
 > Error Lens
@@ -48,32 +48,32 @@ featured: true
 ### 工具类
 > Turbo Console Log  无需手动添加日志。通过单击一个按钮添加控制台日志、
 > Remove Comments  删除代码中的所有注释。
-> Regex Previewer、
+> Regex Previewer,
 > CodeSnap（生成代码选中图片 Take beautiful screenshots of your code in VS Code!）、
-> Markdown Preview Enhanced、
-> Material  icons 、
-> File Nesting Updater、
+> Markdown Preview Enhanced,
+> Material  icons ,
+> File Nesting Updater,
 >
 
 
 ### 主动提示
-:::success
-Path Intellisense、
-cssModules、
-Parameter Hints（ 入参格式提示 ）、
-Quokka.js
-:::
 
-### AI类工具 :
-:::success
-Tabnine  、
-GitHub Copilot 、
-Codeium 、
-Time Master 分析编程时间
-:::
+> Path Intellisense,
+> cssModules、
+> Parameter Hints（入参格式提示）、
+> Quokka.js
+
+
+### AI 类工具
+
+> Tabnine  、
+> GitHub Copilot ,
+> Codeium 、
+> Time Master 分析编程时间
+
 
 ### 主题 (Theme)
-> Monokai Pro （注册key 输入 email 地址为 id@chinapyg.com ，enter后，再输入 key:  d055c-36b72-151ce-350f4-a8f69 ）、
+> Monokai Pro（注册 key 输入 email 地址为 id@chinapyg.com，enter 后，再输入 key:  d055c-36b72-151ce-350f4-a8f69）、
 > Peacock 打开多个 VS Code 实例显示不同颜色
 
 
@@ -397,24 +397,24 @@ Time Master 分析编程时间
     },
     // 每组规则后加一个空行
 
-    // 完全开启/关闭 AutoCorrect，默认: true
+    // 完全开启/关闭 AutoCorrect，默认：true
     "autocorrect.enable": true,
-    // 开启/关闭 AutoCorrect Lint 检查，默认: true
+    // 开启/关闭 AutoCorrect Lint 检查，默认：true
     "autocorrect.enableLint": true,
-    // 是否启用 formatOnSave，默认: true
+    // 是否启用 formatOnSave，默认：true
     "autocorrect.formatOnSave": false
 }
 
 ```
 
-## 使用alias别名实现，代码编译和代码跳转（alias and tsconfig）
+## 使用 alias 别名实现，代码编译和代码跳转（alias and tsconfig）
 
 
-> 此问题可以当做面试题：【vscode 通过配置alias实现 代码编译和代码跳转，但是 webpack alias 和 tsconfig path之间是什么关系】
+> 此问题可以当做面试题：【vscode 通过配置 alias 实现 代码编译和代码跳转，但是 webpack alias 和 tsconfig path 之间是什么关系】
 
 
 在 VS Code 中开发 React + TypeScript 项目时，为了方便文件引入，常常是配置 alias 来简化路径，让组件的引入可以使用别名。
-如下示例，通过 @ 符号，编辑器就应该知道是从  src/  这个路径去找components到这个文件。
+如下示例，通过 @ 符号，编辑器就应该知道是从  src/  这个路径去找 components 到这个文件。
 ```javascript
 import IconFont from '@/components/IconFont';
 import Menus from '@/components/Menus';
@@ -423,9 +423,13 @@ import { Sortable } from './Dndkit/Sortable';
 export { IconFont, Menus, Sortable };
 ```
 
-**想要设置 alias 后，就能在编辑器中 正确编译和点击跳转，其实只有两处需要配置：webpack.resolve 和 tsconfig.json 路径映射的关系。**
-**其中 tsconfig.json 中的 paths 主要用于告诉 TypeScript 编译器如何解析模块导入的路径。**
-**而 webpack.resolve.alias 则用于告诉 webpack 构建过程中如何解析模块导入的路径。这两者的分别配合，确保在开发过程中和构建过程中都能正确地解析模块导入的路径，从而实现代码编译和代码跳转的成功使用。**
+想要设置 alias 后，就能在编辑器中 正确编译和点击跳转，其实只有两处需要配置：webpack.resolve 和 tsconfig.json 路径映射的关系。
+
+  其中 tsconfig.json 中的 paths 主要用于告诉 TypeScript 编译器如何解析模块导入的路径。
+
+  而 webpack.resolve.alias 则用于告诉 webpack 构建过程中如何解析模块导入的路径。这两者的分别配合，确保在开发过程中和构建过程中都能正确地解析模块导入的路径，从而实现代码编译和代码跳转的成功使用。
+
+
 1、项目根目录 需要有 tsconfig.json 配置文件，它是用于告诉 TypeScript 编译器如何 解析代码中的模块导入的路径。
 ```json
 {
@@ -486,7 +490,8 @@ export { IconFont, Menus, Sortable };
 }
 
 ```
-2、webpack.resolve.alias配置 【给编译用的】
+2、webpack.resolve.alias 配置【给编译用的】
+
 ```javascript
 resolve: {
     extensions: ['.tsx', 'ts', '.js', '.json'],
@@ -500,14 +505,17 @@ resolve: {
 
 
 ## 使用 .gitignore_global 忽略 .vscode 文件夹
-用于 Git 的全局忽略配置文件名为 .gitignore_global，它存放在用户主目录下（例如：C:\Users\name名 或 /Users/name）。要启用全局忽略功能，我们需要进行一些配置。
+用于 Git 的全局忽略配置文件名为 .gitignore_global，它存放在用户主目录下（例如：C:\Users\name 名 或 /Users/name）。要启用全局忽略功能，我们需要进行一些配置。
 
-首先，打开命令行工具或终端，使用以下命令告诉Git要使用全局忽略文件：
+首先，打开命令行工具或终端，使用以下命令告诉 Git 要使用全局忽略文件：
+
 ```jsx
 git config --global core.excludesfile ~/.gitignore_global
 ```
-这条命令告诉Git在用户主目录下使用.gitignore_global文件作为全局忽略文件。
-全局忽略文件只针对未被纳入版本控制的文件起作用。在已经提交到版本控制的文件中，Git会遵循.gitignore文件的规则。所以，在使用全局忽略文件时，我们需要注意已经添加到版本控制的文件。
+
+这条命令告诉 Git 在用户主目录下使用.gitignore_global 文件作为全局忽略文件。
+全局忽略文件只针对未被纳入版本控制的文件起作用。在已经提交到版本控制的文件中，Git 会遵循.gitignore 文件的规则。所以，在使用全局忽略文件时，我们需要注意已经添加到版本控制的文件。
+
 ```jsx
 # 忽略所有的日志文件
 *.log
@@ -553,6 +561,7 @@ git config --global core.excludesfile ~/.gitignore_global
 
 
 可以快速了解当前环境变量，在终端中运行 printenv。
+
 ```jsx
 printenv
 ```
