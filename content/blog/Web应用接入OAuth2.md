@@ -1,7 +1,7 @@
 ---
 title: Web应用接入OAuth2
 date: 2023-12-27 19:41:20
-tags: ["Web", "OAuth2" "Google" "Apple" "Facebook"]
+tags: ["Web", "OAuth2", "Google", "Apple", "Facebook"]
 series: ["前端开发"]
 category: ["blog","前端"]
 featured: true
