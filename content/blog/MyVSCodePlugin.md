@@ -2,13 +2,11 @@
 title: 我的 VS Code 常用配置
 date: 2023-11-27 19:31:30
 tags: ["Extensions", "vscode", "alias and tsconfig"]
-series: [""]
+series: ["vscode"]
 category: ["blog"]
 featured: true
 
 ---
-
-
 
 
 ## 我安装的 VS Code 插件 (**Extensions**)

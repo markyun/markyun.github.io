@@ -2,12 +2,11 @@
 title: My VS Code Configuration
 date: 2023-11-27 19:31:30
 tags: ["Extensions", "vscode", "alias and tsconfig"]
-series: [""]
+series: ["vscode"]
 category: ["blog"]
 featured: true
 
 ---
-
 
 
 ## VS Code Extensions
@@ -511,7 +510,7 @@ resolve: {
   },
 ```
 最后，如果插件编辑器的语言状态，都成功加载了对应的配置，就能正常工作了。
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1702005780118-d3891327-5acc-4e43-97f4-f83b73b53132.png#averageHue=%23383739&clientId=u666fbd0b-50c6-4&from=paste&height=306&id=u3ed33181&originHeight=459&originWidth=859&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=47186&status=done&style=none&taskId=u10ecb9ee-1d23-4f48-b6a0-2330d68dad8&title=&width=572.6666666666666)
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1702005780118-d3891327-5acc-4e43-97f4-f83b73b53132.png)
 
 
 ## 使用 .gitignore_global 忽略 .vscode 文件夹
@@ -571,7 +570,7 @@ git config --global core.excludesfile ~/.gitignore_global
 ```jsx
 printenv
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1698304214991-b1464bac-7230-4940-bf27-d3075af7e95c.png#averageHue=%23161514&clientId=u1af1eb05-a548-4&from=paste&height=879&id=u471e72e9&originHeight=1318&originWidth=1870&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=182436&status=done&style=none&taskId=u309e460b-bec0-47e9-9ee9-1e7a13fe74a&title=&width=1246.6666666666667)
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1698304214991-b1464bac-7230-4940-bf27-d3075af7e95c.png)
 可以轻松地将终端分成两边。我经常用一边运行开发服务器，用另一边执行随机的终端命令（git 命令、linting 命令、随机任务等）。超级方便。
 
 
