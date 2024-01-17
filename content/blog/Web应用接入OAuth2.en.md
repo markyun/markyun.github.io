@@ -11,46 +11,30 @@ Accessing third-party authorization login from Google, Apple, and Facebook was a
 
 To briefly introduce, OAuth (Open Authorization) is a token based authorization protocol. That is "Sign In with xxx". Mainstream platforms offer this authentication service, which allows us to authenticate and authorize login to our applications through third-party authentication providers. Enterprise level applications generally use this service, making it convenient for resource owners (RO) to use resource information on resource servers (RS). For more information, refer to the link below.
 
-## Documentation
+<br />实现第三方登录登录方案有三种：
 
-Introducing the OAuth2:
+-   集成第三方一键登录，例如：auth0
+-   分别集成 GitHub、Google、Apple 登录 SDK
+-   不集成 SDK 打开浏览器，统一走 Web 方式登录
 
-[理解 OAuth 2.0 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
+下面主要是介绍第三种方式，纯 Web 方式登录。
 
-Sign In with Apple:
+## 官方文档
 
-[https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_js](https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_js)
-
-[https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple)
-
-Sign In with Google:
-
-[https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn](https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn)
-
-Sign In with Facebook:
-
-[https://developers.facebook.com/docs/facebook-login/](https://developers.facebook.com/docs/facebook-login/)
-
-JS SDK [https://developers.facebook.com/docs/javascript/reference/v18.0](https://developers.facebook.com/docs/javascript/reference/v18.0)
-
-手动构建登录流程，不走 SDK [https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#logindialog](https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#logindialog)
-
-[使用 Facebook 登录功能和现有应用登录系统集成](https://developers.facebook.com/docs/facebook-login/guides/advanced/existing-system)
-
-[https://developers.facebook.com/docs/facebook-login/guides/access-tokens](https://developers.facebook.com/docs/facebook-login/guides/access-tokens) 获取长期口令
+介绍 OAuth2 标准：<br />[理解 OAuth 2.0 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)<br />Sign In with Apple：<br />[https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_js](https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_js)<br />[https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple)<br />Sign In with Google：<br />[https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn](https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn)<br />Sign In with Facebook：<br />[https://developers.facebook.com/docs/facebook-login/](https://developers.facebook.com/docs/facebook-login/)<br />JS SDK [https://developers.facebook.com/docs/javascript/reference/v18.0](https://developers.facebook.com/docs/javascript/reference/v18.0)<br />手动构建登录流程，不走 SDK [https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#logindialog](https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#logindialog)<br />[使用 Facebook 登录功能和现有应用登录系统集成](https://developers.facebook.com/docs/facebook-login/guides/advanced/existing-system)<br />[https://developers.facebook.com/docs/facebook-login/guides/access-tokens](https://developers.facebook.com/docs/facebook-login/guides/access-tokens) 获取长期口令
 
 ## OAuth 工作流程
 
-#### 角色：
+#### 角色（Roles）：
 
 -   业务系统（我们的应用 Application）
-    -   前端（客户端 client）
+    -   前端（客户端 client ）
     -   后台（客户端 API）
 -   用户（Resource Owner）
 -   认证服务（Authorization server，Google、Apple、微信、QQ 等第三方授权服务器）
 -   资源服务器 (Resource server)
 
-#### 流程：
+#### 流程（OAuth Flow）：
 
 -   客户端点击登录，此时浏览器导向授权服务器认证页面，携带客户端标识和重定向 URI。客户端向授权服务器请求授权，
 -   授权服务器验证参数，然后用户未登录需先登录，并选择是否给该客户端授权。
@@ -60,7 +44,17 @@ JS SDK [https://developers.facebook.com/docs/javascript/reference/v18.0](https:/
 -   客户端收到 token 后，传回给前端 view 并更新页面，用户登录成功。
 -   以上登录流程已经完成，需要补充的是：此时客户端可以使用访问令牌向资源服务器请求资源了（具体要看申请了那些权限，如果只是 email 和 name，就没啥用）。
 
-#### 几种模式：
+-   _PS： 由于产品要求用 Web 登录方案同时支持在 APP (Android、IOS)内的界面调用，所以在 APP 调起第三方授权页时，注意不能使用 WebView 模式，OAuth 2.0 政策不允许使用的嵌入式用户代理中（见下方说明）。官方推荐的方式，在 App 宿主情况下，应该使用 App 专用 SDK 拉起 第三方 登录，而不是走 Web ，如果一定要这么做可以 ： _
+    -   _Android：Custom Tabs_
+    -   _iOS：_
+        -   _SFSafariViewController（ iOS 9 ，与 App 相互隔离，它的数据是跟原生 Safari 共享的）、_
+        -   _ASWebAuthenticationSession（ iOS 12 ，可以理解成一个简化版的 APP 内置浏览器，可与 APP 共享数据，它是 Apple Authentication Services 框架的一部分，用于通过 web 进行身份验证）。<br />以上三种方式都可以在 APP 拉起一个原生浏览器的体验，而无需让用户离开你的应用，注意它们俩并没有 WKWebview 和 UIWebView 那么多强大的与原生交互的方法。_
+
+[适用于客户端 Web 应用的 OAuth 2.0 | Authorization | Google for Developers](https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn#authorization-errors-disallowed-useragent)
+
+> From Google documentation: <br /> <br />if you get an error that says “403 disallowed_useragent,” the app uses embedded WebViews. Some developers use WebViews to help display web content in an app. Embedded WebViews puts your security at risk because they could let third parties access and change communications between you and Google.<br />To keep your account secure, Google no longer allows embedded WebViews as of September 30, 2021.
+
+#### <br />几种认证模式：
 
 **授权码模式（是最复杂的，也是最安全的，上面流程就是这种，推荐使用）**
 
@@ -68,7 +62,7 @@ JS SDK [https://developers.facebook.com/docs/javascript/reference/v18.0](https:/
 -   客户端后端拿着 code，去请求 token
 -   销毁 code，下发 token，而用户拿不到 token，客户端保存
 -   客户端使用 token 访问资源服务器的资源
--   过期后使用 refresh_token 刷新，token 再次使用
+-   过期后使用 refresh_token 刷新， token 再次使用
 
 **简化模式（**为 web 浏览器应用设计，不支持 refresh token**）**
 
@@ -80,41 +74,29 @@ JS SDK [https://developers.facebook.com/docs/javascript/reference/v18.0](https:/
 
 #### 以 Gitee 网站为例，使用 GitHub 账号登录（授权码模式）
 
-1、点击登录，触发到 GitHub 的认证页面
-2、允许授权，302 重定向到 Gitee 的 redirect_uri 页面
-3、页面 接受 code 参数后，请求后端，由后端再去获取 GitHub 的 accessToken，返回给前端
-4、再次 302 重定向到 Gitee 首页，并携带 Cookie，完成用户登录成功状态。
+1、点击登录，触发到 GitHub 的认证页面<br />2、允许授权，302 重定向到 Gitee 的 redirect_uri 页面<br />3、页面 接受 code 参数后，请求后端，由后端再去获取 GitHub 的 accessToken，返回给前端<br />4、再次 302 重定向到 Gitee 首页，并携带 Cookie，完成用户登录成功状态。
 
 ```html
 https://github.com/login/oauth/authorize?client_id=5a179b878a9f6ac42acd&
-redirect_uri=https%3A%2F%2Fgitee.com%2Fauth%2Fgithub%2Fcallback& response_type=code&scope=user&
-state=bc9c9fb74d0ad5745f891bc370b9de1cafb46e2a417793fa
+redirect_uri=https%3A%2F%2Fgitee.com%2Fauth%2Fgithub%2Fcallback&
+response_type=code&scope=user&
+state=bc9c9fb74d0aa
+
 ```
 
-认证后，重定向
-![认证后重定向](https://cdn.nlark.com/yuque/0/2023/png/203859/1703756156517-55c266f1-c8aa-4601-b2b2-b7035a7d6ba0.png "认证后重定向")
+认证后，重定向<br />![认证后重定向](https://cdn.nlark.com/yuque/0/2023/png/203859/1703756156517-55c266f1-c8aa-4601-b2b2-b7035a7d6ba0.png "认证后重定向")
 
 ```html
-https://gitee.com/auth/github/callback?code=9c637527cce64b8a5736&state=bc9c9fb74d0ad5745f891bc370b9de1cafb46e2a417793fa
+https://gitee.com/auth/github/callback?code=9c637527cce64b8a5736&state=bc9cfa
 ```
 
-获取 GitHub 的 accessToken
-![获取 GitHub 的 accessToken](https://cdn.nlark.com/yuque/0/2023/png/203859/1703756251104-6d3e2129-76fe-4619-9f69-1f901b1b69a6.png "获取GitHub的 accessToken")
-重定向到首页
-![重定向到首页](https://cdn.nlark.com/yuque/0/2023/png/203859/1703756570890-fcfa1b8c-2b94-4258-8d06-f60101329f5a.png "重定向到首页")
-流程完成，下面分别介绍三种，我们应用用上的 OAuth 场景。
+获取 GitHub 的 accessToken<br />![获取GitHub的 accessToken](https://cdn.nlark.com/yuque/0/2023/png/203859/1703756251104-6d3e2129-76fe-4619-9f69-1f901b1b69a6.png "获取GitHub的 accessToken")<br />重定向到首页<br />![重定向到首页](https://cdn.nlark.com/yuque/0/2023/png/203859/1703756570890-fcfa1b8c-2b94-4258-8d06-f60101329f5a.png "重定向到首页")<br />流程完成，下面分别介绍三种，我们应用用上的 OAuth 场景。
 
 ## 集成 Apple 授权登录 (Sign in with Apple)
 
-苹果官方文档：
-[https://developer.apple.com/documentation/sign_in_with_apple](https://developer.apple.com/documentation/sign_in_with_apple) （前端 js 调用，发起授权）
-[https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_rest_api](https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_rest_api)（REST API，后端同学看的）
+苹果官方文档：<br />[https://developer.apple.com/documentation/sign_in_with_apple](https://developer.apple.com/documentation/sign_in_with_apple) （前端 js 调用，发起授权）<br />[https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_rest_api](https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_rest_api)（ REST API ，后端同学看的）
 
-第三方文档参考：
-[https://zhuanlan.zhihu.com/p/632483498](https://zhuanlan.zhihu.com/p/632483498)
-[Sign in with Apple NODE，苹果第三方登录](https://segmentfault.com/a/1190000020786994#item-4-5)
-[What the Heck is Sign In with Apple?](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple)
-Sign in with Apple Tutorial:
+第三方文档参考：<br />[https://zhuanlan.zhihu.com/p/632483498](https://zhuanlan.zhihu.com/p/632483498)<br />[Sign in with Apple NODE，苹果第三方登录](https://segmentfault.com/a/1190000020786994#item-4-5)<br />[What the Heck is Sign In with Apple?](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple)<br />Sign in with Apple Tutorial：
 
 1. [Sign in with Apple, Part 1: Apps](https://sarunw.com/posts/sign-in-with-apple-1)
 2. [Sign in with Apple, Part 2: Private Email Relay Service](https://sarunw.com/posts/sign-in-with-apple-2)
@@ -123,7 +105,7 @@ Sign in with Apple Tutorial:
 
 **授权码模式（和 Google 不同的是，redirect-url 回传的 code 需要有一个 post 接口来接收）：**
 
-```
+```html
 app client 向 app server 请求 oauth url
 app client 收到 url ，点击事件触发访问 oauth url，
 跳转到 apple id server
@@ -140,32 +122,27 @@ app server 成功返回用户信息给 app client
 
 #### 注册&配置 OAuth2 应用
 
-参考官方文档即可。主要是为了 获取客户端 ID 和客户端密钥：注册成功后，OAuth2 提供商将为您的应用程序分配一个客户端 ID 和客户端密钥。还有重定向 redirectURI，这些凭据将在后续的 OAuth2 交互中使用。
-
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1703754389135-2963205e-d366-44e6-931f-af6cc149a44f.png)
-
-当配置结束后，我们将获得我们所需的两个文件、三个 ID、和一个 URL 连接，如下：
+参考官方文档即可。主要是为了 获取客户端 ID 和客户端密钥：注册成功后，OAuth2 提供商将为您的应用程序分配一个客户端 ID 和客户端密钥。还有重定向 redirectURI，这些凭据将在后续的 OAuth2 交互中使用。<br />![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1703754389135-2963205e-d366-44e6-931f-af6cc149a44f.png)<br />当配置结束后，我们将获得我们所需的两个文件、三个 ID、和一个 URL 连接，如下：
 
 ```jsx
-redirectURI = "https://xx.xxx.online/login/oauth-url"; // 自己设置的重定向域名，可添加多个
-webClientId = "com.xx.cn"; // 设置的 client_id，一般是域名的反写
-teamId = "xx"; // 10 个字符的 team_id
-keyId = "KOI23S78J6"; // 获取的 10 个字符的密钥标识符
+redirectURI = 'https://xx.xxx.online/login/oauth-url' // 自己设置的重定向域名，可添加多个
+webClientId = 'com.xx.cn';  // 设置的client_id，一般是域名的反写
+teamId = 'xx';  // 10个字符的team_id
+keyId = 'KOI23S78J6';  // 获取的10个字符的密钥标识符
+
+
+
 ```
 
-设置登录徽标样式
+设置登录徽标样式<br />[https://appleid.apple.com/signinwithapple/button](https://appleid.apple.com/signinwithapple/button)<br />![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1703775721626-23734410-a70c-4d7c-99c9-8aa6a88088bb.png)
 
-[https://appleid.apple.com/signinwithapple/button](https://appleid.apple.com/signinwithapple/button)
-
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1703775721626-23734410-a70c-4d7c-99c9-8aa6a88088bb.png)
-
-#### Web 代码实现 1（这种是 OAuth 2.0 简化模式）
+#### Web 代码实现 1（ 这种是 OAuth 2.0 简化模式）
 
 前端 SDK 触发
 
 ```jsx
 
-// 1\页面注入 js sdk
+// 1\页面注入js sdk
 <script  type="text/javascript" defer src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"
 ></script>
 
@@ -177,7 +154,7 @@ useEffect(() => {
     usePopup: true,
     redirectURI: redirectUrl,
     state: 'init00state',
-    responseType: 'code', // 有效值为 code 和 id_token。
+    responseType: 'code', // 有效值为code和id_token。
   });
 }, [APPLEKey]);
 
@@ -194,7 +171,7 @@ const data = await AppleID?.auth?.signIn({
 );
  console.log('APPLE signIn 的回调 datadatadata:', data);
 
-// 4\处理响应、与自己的登录接口做交互，返回用户 info，完成登录。
+// 4\处理响应、与自己的登录接口做交互，返回用户info，完成登录。
 if (data?.authorization?.code) {
   const authTokenLocal = jwt.decode(data?.authorization?.id_token) || {};
   const oauthOpenId = get(authTokenLocal, 'sub');
@@ -212,7 +189,7 @@ APPLE 登录成功的回调 data, 拿着 id_token 和自己的 后端 api 做绑
 {
   "authorization": {
     "code": "c0888ff1fe3d44df1ba57b4b7212d3081.0.rrvqs.m7NZ8kqhFhaYjpA1OTzNKA",
-    "id_token": "eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLnVjLmNuIiwiZXhwIjoxNjk4ODI1NDkxLCJpYXQiOjE2OTg3MzkwOTEsInN1YiI6IjAwMTUwMi5jNWZjZDNmMjhmOWM0ZWFiOGNhMTk1OTRiYWQwOTc3MS4wODA3IiwiY19oYXNoIjoiOFJMOHRTcUtJemFrWWxJeWlWRGNjZyIsImVtYWlsIjoibWFqaW55dW4wODAyLm1hcmtAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjk4NzM5MDkxLCJub25jZV9zdXBwb3J0ZWQiOnRydWV9.NAGHwx9r_KQGn-6btXTxIfRZzbG6E4-_WPU1Xqnoy0dzOD9WNIrQxWcauAv7QCWNTOX5Ozq4QJEPlcbRSHOjI7VPn8AcK0XMOm11AYesYjsZBK15BrCu2zWgurbxjnODaTr5Q0salk3LZdl9J8ekBZgdB2eEtd6uAMKKoJWewpdo0g8O0DhVAQgSRju8zwCh_UWcADnj7L9pSsou0g04mgeboxPoIPRTnK6egfVlaD19Gjz5_FbMpbiB4inFky7BGEmUUMk_dbAOpkQQ_Vw0Pep8D_j8zt5W81RJUGkzhN9MUlvXWf2w8yJpdq8pezXgyW-_gMkmXtZFksS_4aGx1w",
+    "id_token": "eysS_4aGx1w",
     "state": "signIn00state"
   }
 }
@@ -234,7 +211,7 @@ APPLE 登录成功的回调 data, 拿着 id_token 和自己的 后端 api 做绑
 }
 ```
 
-#### Web 代码实现 2（这种是 授权模式）
+#### Web 代码实现 2（ 这种是 授权模式）
 
 手工触发 (授权模式)
 
@@ -247,49 +224,119 @@ https://appleid.apple.com/auth/authorize?client_id=[CLIENT_ID]&redirect_uri=[RED
 
 https://appleid.apple.com/auth/oauth2/v2/authorize
 
+  const oauthSignInApple = (key) =>{
+    const url = 'https://appleid.apple.com/auth/authorize';
+    const appleBookForm = document.createElement('form');
+
+    appleBookForm.setAttribute('method', 'GET');
+    appleBookForm.setAttribute('action', url);
+    const params = {
+      client_id: key?.clientId,
+      redirect_uri: key?.redirectUrl,
+      response_type: 'code',
+      scope: 'email name',
+      response_mode:'form_post',
+      state: OAUTH_LOGIN_PLATFORM_TYPE.APPLE,
+      usePopup: false,
+    };
+
+    // Add form parameters as hidden input values.
+    // eslint-disable-next-line no-restricted-syntax
+    for (const p in params) {
+      const input = document.createElement("input");
+      input.setAttribute("type", "hidden");
+      input.setAttribute('name', p);
+      input.setAttribute('value', params[p]);
+      appleBookForm.appendChild(input);
+    }
+    document.body.appendChild(appleBookForm);
+    appleBookForm.submit();
+  }
+
+
 ```
 
-#### 登录流程
+#### ASWebAuthenticationSession 代码实现（这种主要是 APP 端主导）
 
-用户点击 Apple 登录图标，会跳转到 Apple 登录网站，输入账号密码。首次登录会在任一 Apple 设备弹出原生登录授权验证 (双重验证)，输入 6 位随机验证码 即可登录完成。
+```jsx
+func oauthLogin(type: String) {
+        // val GitHub、Google、SignInWithApple
+        let redirectUrl = "配置的 URL Types"
+        let loginURL = Configuration.shared.awsConfiguration.authURL + "/authorize" + "?identity_provider=" + type + "&redirect_uri=" + redirectUri + "&response_type=CODE&client_id=" + Configuration.shared.awsConfiguration.appClientId
+        session = ASWebAuthenticationSession(url: URL(string: loginURL)!, callbackURLScheme: redirectUri) { url, error in
+            if error != nil {
+                return
+            }
+            if let responseURL = url?.absoluteString {
+                let components = responseURL.components(separatedBy: "#")
+                for item in components {
+                    if item.contains("code") {
+                        let tokens = item.components(separatedBy: "&")
+                        for token in tokens {
+                            if token.contains("code") {
+                                let idTokenInfo = token.components(separatedBy: "=")
+                                if idTokenInfo.count > 1 {
+                                    let code = idTokenInfo[1]
+                                    print("身份验证 code 码: \(code)")
+                                    return
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        session.presentationContextProvider = self
 
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1703775181457-dc133d2b-a274-41e6-9e65-c841eda23224.png#taskId=u0ab9e70f-cbf5-48b5-8c78-6ca6a1fced7&title=&width=557)
 
-注意：首次登录会选择是否隐藏邮箱，选择隐藏将会使用 apple 提供的一个匿名邮箱而不是真实邮箱号。当选择信任浏览器后，之后在此浏览器中登录只需要输入账号、密码即可。
 
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1703775215350-7bac5760-3198-46d4-8b7b-4eb9c1ef3bb1.png)
 
-在登录后用户可以随时在 apple 设备上取消 apple id 在该程序上的授权登录。mac 上 safari 浏览器上可直接验证登录。也可以通过手机号等其他方式进行验证，apple 设备如果开启双重认证，会使用双重验证，简单说就是当你首次使用 Apple 登录一个设备时，在输入 Apple id 和密码之后，还需要在其他已登录的 Apple 设备上确认授权，并输入已登录设备上提供的验证码进行验证。
+
+// 版本2
+
+// 在 iOS 12 中，ASWebAuthenticationSession 如果沒有 strong reference 的話就會消失掉，所以這邊先建立一個變數並放到 completion handler 裡，成為它的 strong reference。
+var session: ASWebAuthenticationSession?
+
+// 提供獲取 authorization code 用的 URL 與回傳 URL 的 scheme。
+// 當使用者成功授權後，授權伺服器會傳送回傳 URL 給 session，而 session 會直接關掉瀏覽器並呼叫 completionHandler。
+session = ASWebAuthenticationSession(url: url, callbackURLScheme: "app", completionHandler:  { callbackURL, error in
+
+    // 使用者成功授權後，從回傳 URL 中抽取 authorization code 以進行後續步驟。
+
+    session = nil
+})
+
+// 提供 session 用來顯示的視窗。
+session?.presentationContextProvider = presentationContextProvider
+
+// 告訴 session 啟動流程。
+session?.start()
+```
+
+#### 登录流程（手工模式）
+
+用户点击 Apple 登录图标，会跳转到 Apple 登录网站，输入账号密码。首次登录会在任一 Apple 设备弹出原生登录授权验证(双重验证)，输入 6 位随机验证码 即可登录完成。<br />![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1703775181457-dc133d2b-a274-41e6-9e65-c841eda23224.png)<br />注意：首次登录会选择是否隐藏邮箱，选择隐藏将会使用 apple 提供的一个匿名邮箱而不是真实邮箱号。当选择信任浏览器后，之后在此浏览器中登录只需要输入账号、密码即可。<br />![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1703775215350-7bac5760-3198-46d4-8b7b-4eb9c1ef3bb1.png)<br />在登录后用户可以随时在 apple 设备上取消 apple id 在该程序上的授权登录。mac 上 safari 浏览器上可直接验证登录。也可以通过手机号等其他方式进行验证，apple 设备如果开启双重认证，会使用双重验证，简单说就是当你首次使用 Apple 登录一个设备时，在输入 Apple id 和密码之后，还需要在其他已登录的 Apple 设备上确认授权，并输入已登录设备上提供的验证码进行验证。
 
 #### 处理授权响应（分两种模式）
 
-用户单击“使用 Apple 登录”按钮后，框架会将授权信息发送给 Apple。Apple 处理授权请求后：
+用户单击“使用 Apple 登录”按钮后，框架会将授权信息发送给 Apple。Apple 处理授权请求后：<br />如果是 usePopup 模式，是直接返回 data【简化登录模式】；<br />否则会将包含授权结果的 HTTP POST 请求发送到 中提供的 URL redirectURI【授权码模式】 。<br />HTTP 正文包含 content-type 为 application/x-www-form-urlencoded 的结果参数。成功的响应包含以下参数：<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/203859/1705498134616-baf97480-2c5b-4671-94c7-ac3eb137632a.png)<br />对应的接收端拿到这个值之后进行处理，返回给前端即可实现登录。返回给前端可以是 302 重定向方式，将 authorization 信息携带在 cookie 中。如果需要自己的 API 接口也走 302 重定向到中间过渡页，可以这样来访问接口：不用 http 请求，直接走 form 表单 或 window.location.href 就会让页面类型变成 【document/Redirect】。需要注意 Document Redirect 与 XHR Redirect 区别。<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/203859/1705498595555-969341de-004d-4aa1-8fb6-52db75b7173b.png)
 
-    如果是 usePopup 模式，是直接返回 data【简化模式】；
-    否则会将包含授权结果的 HTTP POST 请求发送到 中提供的 URL redirectURI【授权码模式】 。
-
-HTTP 正文包含 content-type 为 application/x-www-form-urlencoded 的结果参数。成功的响应包含以下参数：
+额外补充的小知识：<br />form 表单请求属于 document 请求类型，天生不会有跨域问题.<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/203859/1705498937979-aa18070e-8bef-46bd-a6b7-3ec14f827175.png)<br />Document Redirect 是由服务器直接触发的浏览器重定向，而 XHR Redirect 是由 JavaScript 中的 XMLHttpRequest 对象发送请求并处理重定向的方式。
 
 ## 集成 Google OAuth2
 
 #### 需要注意
 
-##### 一、google 的 gsi/client 和 oauth2 的区别
+##### 一、 google 的 gsi/client 和 oauth2 的区别
 
 > Google Identity Services (GIS) 的 gsi/client 是用于实现用户登录的 JavaScript 库。它可以帮助开发者在网页中集成“使用 Google 账号登录”的功能。当用户点击登录按钮后，gsi/client 会弹出一个 Google 登录界面，用户可以选择使用他们的 Google 账号进行登录。这样，开发者就可以通过 gsi/client 获取用户的身份信息，比如用户的邮箱地址等。
 > OAuth2 则是通过授权 code，来获取访问令牌，然后使用该访问令牌来调用 Google API 或其他受保护的资源。
 
-综上：
-gsi/client 用于前端直接新开一个弹窗，实现帮用户用 Google 实现登录网页的功能。【简化模式】
-OAuth2 则是先获取访问令牌后，Google 重定向页面 URL 得到后授权码 code，拿这个授权码去接口去授权，适合在不能弹窗的场景下使用。【授权码模式】
+综上：<br />gsi/client 用于前端直接新开一个弹窗，实现帮用户用 Google 实现登录网页的功能。【简化模式】<br />OAuth2 则是先获取访问令牌后，Google 重定向页面 URL 得到后授权码 code，拿这个授权码去接口去授权，适合在不能弹窗的场景下使用。【授权码模式】
 
 ##### 二、不允许使用的嵌入式用户代理中
 
-Google 的授权页面，在 Google 的 OAuth 2.0 政策中 disallowed_useragent 要求不能被 webview 嵌套。解决办法在下面：
-
-Android 开发者在 android.webkit.WebView 中打开授权请求时可能会遇到此错误消息。开发者应该改用 Android 库，例如适用于 Android 的 Google 登录或 OpenID 基金会的 AppAuth for Android。当 Android 应用通过嵌入式用户代理打开常规 Web 链接，且用户从您的网站转到 Google 的 OAuth 2.0 授权端点时，Web 开发者可能会遇到此错误。开发者应允许在操作系统的默认链接处理程序（包括 Android App Links 处理程序或默认浏览器应用）中打开常规链接。Android 自定义标签页库也是一个受支持的选项。
-
-iOS 和 macOS 开发者在 WKWebView 中打开授权请求时可能会遇到此错误。开发者应该改用 iOS 库，例如适用于 iOS 的 Google 登录或 OpenID 基金会的 AppAuth for iOS。当 iOS 或 macOS 应用在嵌入式用户代理中打开常规 Web 链接，且用户从您的网站转到 Google 的 OAuth 2.0 授权端点时，Web 开发者可能会遇到此错误。开发者应允许操作系统的默认链接处理程序（包括通用链接处理程序或默认浏览器应用）中打开常规链接。SFSafariViewController 库也是一个受支持的选项。
+Google 的授权页面，在 Google 的 OAuth 2.0 政策中 disallowed_useragent 要求不能被 webview 嵌套。解决办法在下面：<br />Android 开发者在 android.webkit.WebView 中打开授权请求时可能会遇到此错误消息。开发者应该改用 Android 库，例如适用于 Android 的 Google 登录或 OpenID 基金会的 AppAuth for Android。当 Android 应用通过嵌入式用户代理打开常规 Web 链接，且用户从您的网站转到 Google 的 OAuth 2.0 授权端点时，Web 开发者可能会遇到此错误。开发者应允许在操作系统的默认链接处理程序（包括 Android App Links 处理程序或默认浏览器应用）中打开常规链接。Android 自定义标签页库也是一个受支持的选项。<br />iOS 和 macOS 开发者在 WKWebView 中打开授权请求时可能会遇到此错误。开发者应该改用 iOS 库，例如适用于 iOS 的 Google 登录或 OpenID 基金会的 AppAuth for iOS。当 iOS 或 macOS 应用在嵌入式用户代理中打开常规 Web 链接，且用户从您的网站转到 Google 的 OAuth 2.0 授权端点时，Web 开发者可能会遇到此错误。开发者应允许操作系统的默认链接处理程序（包括通用链接处理程序或默认浏览器应用）中打开常规链接。SFSafariViewController 库也是一个受支持的选项。
 
 #### Web 代码实现 1（这种属于 授权码模式）
 
@@ -299,143 +346,154 @@ iOS 和 macOS 开发者在 WKWebView 中打开授权请求时可能会遇到此�
 -   客户端拿到 code，请求 token
 -   销毁 code，下发 token，而用户拿不到 token，客户端保存
 -   客户端使用 token 访问资源
--   过期后使用 refresh_token 刷新，token 再次使用
+-   过期后使用 refresh_token 刷新， token 再次使用
 
 Create form to request
 
 ```jsx
 /*
- * Create form to request access token from Google's OAuth 2.0 server.
- */
+  * Create form to request access token from Google's OAuth 2.0 server.
+  */
 const oauthSignIn = (key) => {
-    // Google's OAuth 2.0 endpoint for requesting an access token
-    const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
+  // Google's OAuth 2.0 endpoint for requesting an access token
+  const oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
 
-    // Create <form> element to submit parameters to OAuth 2.0 endpoint.
-    const googleForm = document.createElement("form");
-    googleForm.setAttribute("method", "GET"); // Send as a GET request.
-    googleForm.setAttribute("action", oauth2Endpoint);
+  // Create <form> element to submit parameters to OAuth 2.0 endpoint.
+  const googleForm = document.createElement('form');
+  googleForm.setAttribute('method', 'GET'); // Send as a GET request.
+  googleForm.setAttribute('action', oauth2Endpoint);
 
-    // Parameters to pass to OAuth 2.0 endpoint.
-    const params = {
-        client_id: clientId,
-        redirect_uri: redirectUrl,
-        response_type: "code",
-        scope: "https://www.googleapis.com/auth/userinfo.profile",
-        include_granted_scopes: "true",
-        state: OAUTH_LOGIN_PLATFORM_TYPE.GOOGLE,
-    };
+  // Parameters to pass to OAuth 2.0 endpoint.
+  const params = {
+    client_id:clientId,
+    redirect_uri: redirectUrl,
+    response_type: 'code',
+    scope: 'https://www.googleapis.com/auth/userinfo.profile',
+    include_granted_scopes: "true",
+    state: OAUTH_LOGIN_PLATFORM_TYPE.GOOGLE,
+  };
 
-    // Add form parameters as hidden input values.
-    // eslint-disable-next-line no-restricted-syntax
-    for (const p in params) {
-        const input = document.createElement("input");
-        input.setAttribute("type", "hidden");
-        input.setAttribute("name", p);
-        input.setAttribute("value", params[p]);
-        googleForm.appendChild(input);
-    }
+  // Add form parameters as hidden input values.
+  // eslint-disable-next-line no-restricted-syntax
+  for (const p in params) {
+    const input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute('name', p);
+    input.setAttribute('value', params[p]);
+    googleForm.appendChild(input);
+  }
 
-    // Add form to page and submit it to open the OAuth 2.0 endpoint.
-    document.body.appendChild(googleForm);
-    googleForm.submit();
+  // Add form to page and submit it to open the OAuth 2.0 endpoint.
+  document.body.appendChild(googleForm);
+  googleForm.submit();
 };
+
 ```
 
 OAuth 2.0 服务器响应
 
 ```markdown
-// 正确响应：code 交给自己的服务器 api，完成后续操作。
+
+// 正确响应：code交给自己的服务器api，完成后续操作。
 http://oauth2.example.com/callback?state=G&code=4%2F0AfJohXmMnygj-k1dcfv8k8bObKZOkeg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=none
 
 // 错误响应：
 https://oauth2.example.com/callback#error=access_denied
+
 ```
+
+拿到回传的 code 交给自己的服务器 api，完成后续认真操作这，最后自己的 api 返回 authorization 信息，保存即可。
 
 #### Web 代码实现 2（这种属于简化模式）
 
 ```javascript
-// 传统 web 登录
+// 传统 web登录
 useEffect(() => {
-    initGoogleScript();
+  initGoogleScript();
 }, []);
+
 
 // eslint-disable-next-line no-unused-vars
 const initGoogleScript = () => {
-    // const script = document.createElement('script');
-    // script.src = 'https://accounts.google.com/gsi/client';
-    // document.head.append(script);
-    function handleCredentialResponse(response) {
-        const authTokenLocal = jwt.decode(response.credential) || {};
-        console.log("GOOGLE 回调 authTokenLocal", response.credential, authTokenLocal);
-        const oauthOpenId = get(authTokenLocal, "sub");
-        // const email = get(authTokenLocal, 'email');
-        // 如果是走前端自己组织的 URL，才和 APP 相同的处理函数
-        if (oauthOpenId) {
-            loginSuccess(res);
-        }
+  // const script = document.createElement('script');
+  // script.src = 'https://accounts.google.com/gsi/client';
+  // document.head.append(script);
+  function handleCredentialResponse(response) {
+    const authTokenLocal = jwt.decode(response.credential) || {};
+    console.log("GOOGLE 回调 authTokenLocal", response.credential,authTokenLocal);
+    const oauthOpenId = get(authTokenLocal, 'sub');
+    // const email = get(authTokenLocal, 'email');
+    // 如果是走前端自己组织的URL，才和APP相同的处理函数
+    if (oauthOpenId) {
+      loginSuccess(res);
     }
+  }
 
-    loadScript("https://accounts.google.com/gsi/client", () => {
-        console.log("loadScript....");
-        try {
-            // eslint-disable-next-line no-undef
-            google.accounts.id.initialize({
-                client_id: "643984392818-v2aad7hxx3r65h29imbq4d.apps.googleusercontent.com", //  GOOGLE_CLIENT_ID,
-                callback: handleCredentialResponse,
-            });
+  loadScript('https://accounts.google.com/gsi/client', () => {
+    console.log('loadScript....');
+    try {
+      // eslint-disable-next-line no-undef
+      google.accounts.id.initialize({
+        client_id: '643984392818-v2aad7hxx3r65h29imbq4d.apps.googleusercontent.com', //  GOOGLE_CLIENT_ID,
+        callback: handleCredentialResponse,
+      });
 
-            // eslint-disable-next-line no-undef
-            google.accounts.id.renderButton(
-                document.getElementById("btn-google-login"),
-                {
-                    icon: "standard",
-                    type: "icon",
-                    shape: "circle",
-                    theme: "outline",
-                    text: "signin_with",
-                    size: "large",
-                } // customization attributes
-            );
-            // google.accounts.id.prompt(); // also display the One Tap dialog
-        } catch {
-            //
-        }
-    });
+      // eslint-disable-next-line no-undef
+      google.accounts.id.renderButton(
+        document.getElementById('btn-google-login'),
+        {
+          icon: 'standard',
+          type: 'icon',
+          shape: 'circle',
+          theme: 'outline',
+          text: 'signin_with',
+          size: 'large',
+        }, // customization attributes
+      );
+      // google.accounts.id.prompt(); // also display the One Tap dialog
+    } catch {
+      //
+    }
+  });
 };
 
-// 动态加载 Google js sdk 的
+
+
+// 动态加载Google js sdk 的
 export const loadScript = (url, callback) => {
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    // script.async = 'async';
-    script.async = true;
-    script.src = url;
-    document.body.appendChild(script);
-    if (script.readyState) {
-        // IE
-        script.onreadystatechange = () => {
-            if (script.readyState === "complete" || script.readyState === "loaded") {
-                script.onreadystatechange = null;
-                callback();
-            }
-        };
-    } else {
-        // 非 IE
-        script.onload = () => {
-            callback();
-        };
-    }
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+  // script.async = 'async';
+  script.async = true;
+  script.src = url;
+  document.body.appendChild(script);
+  if (script.readyState) {
+    // IE
+    script.onreadystatechange = () => {
+      if (script.readyState === 'complete' || script.readyState === 'loaded') {
+        script.onreadystatechange = null;
+        callback();
+      }
+    };
+  } else {
+    // 非IE
+    script.onload = () => {
+      callback();
+    };
+  }
 };
+
 
 // 登录成功桥接 app 的方法
-const loginSuccess = (resp) => {
-    console.log(" 登录成功桥接 app 的方法", resp);
-    const { token } = resp || {};
-    if (token && window?.uc) {
-        window?.uc.loginSuccess(JSON.stringify(resp));
-    }
+const loginSuccess = resp => {
+  console.log(' 登录成功桥接 app 的方法', resp);
+  const { token } = resp || {};
+  if (token && window?.uc) {
+    window?.uc.loginSuccess(JSON.stringify(resp));
+  }
 };
+
+
 
 // 下面交给 APP 桥接 loginSuccess 处理了
 /*
@@ -513,7 +571,7 @@ FB.login(function(response) {
    }
 });
 
-// 也可以调用 FB.getLoginStatus 检查登录状态
+// 也可以调用 FB.getLoginStatus检查登录状态
 FB.getLoginStatus(function(response) {
 
    if (response.status === 'connected') {
@@ -557,8 +615,8 @@ authResponse
     "authResponse": {
         "userID": "861892xxx14591",
         "expiresIn": 516xx03,
-        "accessToken": "EAAj1IkmDxxxdoLLvwVlcwTFDnpZAclgxgSRy3oSqb7xknDvrZCl7b4OjgxEtmU1KXafDPxRmv82vHmQh0mb4NTT8kVtIDsO5bJhmjDFyY2a7fZBEy8cZCLmYq7IvERnkFzABFEu6XfenkWOgZAinMdX6dG2gdrrGB719B56h2e81ZCxZCgwhgvLfwpciNcZD",
-        "signedRequest": "jo_YCmySFAADTVkxxHN4vma-Jm6Crs.eyJ1c2VyX2lkIjoiODYxODkyMzQ4NzE0NTkxIiwiY29kZSI6IkFRQ2dXLXNGSVF3YTFKclZvTG5YU0luZHJGR3ptaG5Od2V2eHVwTlNuNEtSMmQ5Uks1WW5XN0NlMW1SbmVLRzd5NE1BVGU2TDV0b3hsYlN6Y1FZVThXcVFfV2NIUzZjSTR4d2FycHVmNlF4NV9Oc2QtX1QtbVU5T2FRa2NZUTZRSng5UTdoYTVKMm1UWkJ4S0wxa1MtNDJmX3R0WVk2OUQ1ZnEtLTMyeVJWM3Eya0tvZkE0cWhaX0J6QTNpc3NIRk1MOUlnOW1ETEFMWk85Xy15OWRWcFZlNWtBeS1udDhORGdXOWl4WHpjMU1EbVByX3JCbXVhc2g1S2N0RFByc0J1LTE0TWM2N243ZHhIb0hudV9DV0tzNkNYaWdxTGZleEV3b3VpUzJlY0FmZEhZNFBkZzBrUXBkY0hsWWVteEZoSl9OSEdTaTExWGhwWThhX2lxNzJFb2pmIiwiYWxnb3JpdGhtIjoiSE1BQy1TSEEyNTYiLCJpc3N1ZWRfYXQiOjE2OTg3NDUwNDd9",
+        "accessToken": "EAAj1IkmDxxxdoiNcZD",
+        "signedRequest": "jo_Dd9",
         "graphDomain": "facebook",
         "data_access_expiration_time": 170xx47
     },
@@ -569,11 +627,7 @@ authResponse
 
 #### Web 代码实现 2（这种属于 授权码模式）
 
-在不使用 SDK 的情况下为网页或桌面应用实施基于浏览器的登录，可以使用浏览器重定向来构建自己的登录流程。
-
-[https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#exchangecode](https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#exchangecode)
-
-当用户点击 Log in with Facebook 时，发出如下 HTTP POST 请求：
+在不使用 SDK 的情况下为网页或桌面应用实施基于浏览器的登录，可以使用浏览器重定向来构建自己的登录流程。<br />[https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#exchangecode](https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#exchangecode)<br />当用户点击 Log in with Facebook 时，发出如下 HTTP POST 请求：
 
 ```
 // diglog 模式
@@ -597,25 +651,76 @@ error_reason=user_denied
 
 ```
 
-注意：redirect_uri 值 在应用面板中确认是否已为您的应用设置该网址。在应用面板左侧导航菜单的**产品**下点击 **Facebook 登录**，然后点击**设置**。在**客户端 OAuth 设置**部分验证**有效的 OAuth 重定向 URI。**
+注意：redirect_uri 值 在应用面板左侧导航菜单的**产品**下点击 **Facebook 登录**，然后点击**设置**。在**客户端 OAuth 设置**部分验证**有效的 OAuth 重定向 URI。**
 
-#### 登录支持 OpenID Connect（OIDC）标准的授权代码流程和代码交换证明密钥（PKCE）这种属于 授权码模式
+#### 登录支持 OpenID Connect （OIDC） 标准的授权代码流程和代码交换证明密钥 （PKCE）这种也属于 授权码模式
 
 [**https://developers.facebook.com/docs/facebook-login/guides/advanced/oidc-token**](https://developers.facebook.com/docs/facebook-login/guides/advanced/oidc-token)
 
 ```markdown
 https://www.facebook.com/v11.0/dialog/oauth?
-client_id={app-id} // Replace with your application’s ID
-&scope=openid
-&response_type=code
-&redirect_uri={"https://www.domain.com/login"} // Replace with your Redirect URI
-&state={"state123abc"} // Replace with your State param
-&code_challenge={"E91k-123k123-115X"} // Replace with your generated code_challenge
-&code_challenge_method=S256 // Replace with the method used to generate the code_challenge
-$nonce={"123"} // Replace with a randomly generated nonce value
+  client_id={app-id} // Replace with your application’s ID
+  &scope=openid
+  &response_type=code
+  &redirect_uri={"https://www.domain.com/login"}  // Replace with your Redirect URI
+  &state={"state123abc"} // Replace with your State param
+  &code_challenge={"E91k-123k123-115X"} // Replace with your generated code_challenge
+  &code_challenge_method=S256 // Replace with the method used to generate the code_challenge
+  $nonce={"123"} // Replace with a randomly generated nonce value
 
-// 返回值，拿着 code 去这个接口换口令令牌 /oauth/access_token
+
+// 返回值，拿着code 去这个接口换口令令牌  /oauth/access_token
 https://www.domain.com/login?state=state123abc&code={authorization-code}
+
+
+发出请求
+
+ /*
+  * Create form to request access token from Google's OAuth 2.0 server.
+  */
+  const oauthSignInGoogle = (key) => {
+    // Google's OAuth 2.0 endpoint for requesting an access token
+    const oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+    // Create <form> element to submit parameters to OAuth 2.0 endpoint.
+    const googleForm = document.createElement('form');
+    googleForm.setAttribute('method', 'GET'); // Send as a GET request.
+    googleForm.setAttribute('action', oauth2Endpoint);
+
+    // Parameters to pass to OAuth 2.0 endpoint.
+    const params = {
+      client_id: key?.clientId,
+      redirect_uri: 'http://localhost:8000/userCenter/login/SignIn', // key.redirectUrl,
+      response_type: 'code',
+      scope: 'https://www.googleapis.com/auth/userinfo.profile',
+      include_granted_scopes: "true",
+      state: OAUTH_LOGIN_PLATFORM_TYPE.GOOGLE,
+    };
+
+    // Add form parameters as hidden input values.
+    // eslint-disable-next-line no-restricted-syntax
+    for (const p in params) {
+      const input = document.createElement("input");
+      input.setAttribute("type", "hidden");
+      input.setAttribute('name', p);
+      input.setAttribute('value', params[p]);
+      googleForm.appendChild(input);
+    }
+
+    // Add form to page and submit it to open the OAuth 2.0 endpoint.
+    document.body.appendChild(googleForm);
+    googleForm.submit();
+  };
+```
+
+用户一旦拒绝授予某权限，除非您明确告知登录对话框您正在重新请求已拒绝的权限，否则登录对话框不会重新请求该权限。只需在登录对话框网址中添加 auth_type=rerequest 参数即可：
+
+```javascript
+https://www.facebook.com/v18.0/dialog/oauth?
+    client_id={app-id}
+    &redirect_uri={redirect-uri}
+    &auth_type=rerequest
+    scope=email
 ```
 
 ##### 使用短期口令交换长期口令
@@ -648,9 +753,6 @@ GET
 
 #### 应用已有登录系统，结合 Facebook 登录
 
-可能需要处理更复杂的情况
-用户使用他们的电子邮箱和密码注册应用，但之后又想使用 Facebook 登录获取 Facebook 帐户的数据，以便向时间线发帖或用于在今后登录您的应用。
-用户使用他们的电子邮箱和密码注册应用，但之后又单独选择通过 Facebook 登录。本指南假定用户最初提供的邮箱就是与用户的 Facebook 帐户关联的首选邮箱。
-用户使用 Facebook 登录注册应用，之后又想使用电子邮箱和密码登录此帐户。
-下面这个指南，介绍了处理这些情况的最佳方式。
-[https://developers.facebook.com/docs/facebook-login/guides/advanced/existing-system](https://developers.facebook.com/docs/facebook-login/guides/advanced/existing-system)
+可能需要处理更复杂的情况<br />用户使用他们的电子邮箱和密码注册应用，但之后又想使用 Facebook 登录获取 Facebook 帐户的数据，以便向时间线发帖或用于在今后登录您的应用。<br />用户使用他们的电子邮箱和密码注册应用，但之后又单独选择通过 Facebook 登录。本指南假定用户最初提供的邮箱就是与用户的 Facebook 帐户关联的首选邮箱。<br />用户使用 Facebook 登录注册应用，之后又想使用电子邮箱和密码登录此帐户。<br />下面这个指南，介绍了处理这些情况的最佳方式。<br />[https://developers.facebook.com/docs/facebook-login/guides/advanced/existing-system](https://developers.facebook.com/docs/facebook-login/guides/advanced/existing-system)
+
+本教程完毕。
