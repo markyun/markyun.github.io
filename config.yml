@@ -108,7 +108,7 @@ params:
 # languages: "zh"
 languages:
     zh:
-      params:
+      # params:
         languageName: 中
         author: ASCII-ART
         authorDescription: ASCII-ART 保持领先所需的见解
@@ -140,7 +140,7 @@ languages:
                 #   url: https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli
                 #   weight: 5
     en:
-      params:
+      # params:
         languageName: EN
         author: ASCII-ART
         authorDescription: ASCII-ART The insights you need to keep ahead
