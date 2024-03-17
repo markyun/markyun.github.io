@@ -2,7 +2,9 @@
 
 <h2 align=center>Web Developer/ Photog/ Work at NanJing</h2>
 
-本博客主题来源于 [hugo-ladder](https://github.com/guangzhengli/hugo-ladder-exampleSite) , 中文即阶梯的含义。读书为输入，写作为输出，都是获取知识的阶梯。模板文档中包括了 hugo 所有的安装流程信息，例如如何免费构建独立的博客网站。本站适配了🌐 多语言 | 🌙 暗色模式 | 📱 移动端适配，你可以通过直接访问网站，来获得原生体验。
+本博客主题来源于 [hugo-ladder](https://github.com/guangzhengli/hugo-ladder-exampleSite) , 中文即阶梯的含义。读书为输入，写作为输出，都是获取知识的阶梯。模板文档中包括了 hugo 所有的安装流程信息，例如如何免费构建独立的博客网站。本站适配了 🌐 多语言 | 🌙 暗色模式 | 📱 移动端适配，你可以通过直接访问网站，来获得原生体验。
+
+另外还有 WebCIA Weekly (Web 情报局) 推荐关注 https://markyun.github.io/Weekly/
 
 ### 基础使用
 

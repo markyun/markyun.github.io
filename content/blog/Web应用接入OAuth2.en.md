@@ -21,7 +21,24 @@ To briefly introduce, OAuth (Open Authorization) is a token based authorization 
 
 ## 官方文档
 
-介绍 OAuth2 标准：<br />[理解 OAuth 2.0 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)<br />Sign In with Apple：<br />[https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_js](https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_js)<br />[https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple)<br />Sign In with Google：<br />[https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn](https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn)<br />Sign In with Facebook：<br />[https://developers.facebook.com/docs/facebook-login/](https://developers.facebook.com/docs/facebook-login/)<br />JS SDK [https://developers.facebook.com/docs/javascript/reference/v18.0](https://developers.facebook.com/docs/javascript/reference/v18.0)<br />手动构建登录流程，不走 SDK [https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#logindialog](https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#logindialog)<br />[使用 Facebook 登录功能和现有应用登录系统集成](https://developers.facebook.com/docs/facebook-login/guides/advanced/existing-system)<br />[https://developers.facebook.com/docs/facebook-login/guides/access-tokens](https://developers.facebook.com/docs/facebook-login/guides/access-tokens) 获取长期口令
+介绍 OAuth2 标准： [理解 OAuth 2.0 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
+
+Sign In with Apple：
+[https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_js](https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_js)
+[https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple)
+
+Sign In with Google：
+
+[https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn](https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn)
+
+Sign In with Facebook： [https://developers.facebook.com/docs/facebook-login/](https://developers.facebook.com/docs/facebook-login/)
+
+JS SDK [https://developers.facebook.com/docs/javascript/reference/v18.0](https://developers.facebook.com/docs/javascript/reference/v18.0)
+
+手动构建登录流程，不走 SDK [https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#logindialog](https://developers.facebook.com/docs/facebook-login/guides/advanced/manual-flow#logindialog)
+
+[使用 Facebook 登录功能和现有应用登录系统集成](https://developers.facebook.com/docs/facebook-login/guides/advanced/existing-system)
+[https://developers.facebook.com/docs/facebook-login/guides/access-tokens](https://developers.facebook.com/docs/facebook-login/guides/access-tokens) 获取长期口令
 
 ## OAuth 工作流程
 

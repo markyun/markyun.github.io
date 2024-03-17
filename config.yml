@@ -25,6 +25,9 @@ menu:
         - name: 生活
           url: /art
           weight: 2
+        - name: Weekly
+          url: https://markyun.github.io/Weekly/
+          weight: 6
         - name: 标签
           url: /tags
           weight: 3
@@ -72,7 +75,7 @@ params:
             enable: true
             repo: markyun/markyun.github.io
             repo_id: R_kgDOKyM4fA
-            category: Announcements
+            category: General
             category_id: DIC_kwDOKyM4fM4CbSGO
             mapping: pathname
             position: top
@@ -105,6 +108,7 @@ params:
 # languages: "zh"
 languages:
     zh:
+      params:
         languageName: 中
         author: ASCII-ART
         authorDescription: ASCII-ART 保持领先所需的见解
@@ -120,6 +124,9 @@ languages:
                 - name: 生活
                   url: /art
                   weight: 2
+                - name: Weekly
+                  url: https://markyun.github.io/Weekly/
+                  weight: 6
                 - name: 归档
                   url: /archives
                   weight: 3
@@ -133,6 +140,7 @@ languages:
                 #   url: https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli
                 #   weight: 5
     en:
+      params:
         languageName: EN
         author: ASCII-ART
         authorDescription: ASCII-ART The insights you need to keep ahead
@@ -148,6 +156,9 @@ languages:
                 - name: Art
                   url: /art
                   weight: 2
+                - name: Weekly
+                  url: https://markyun.github.io/Weekly/
+                  weight: 6
                 - name: Archive
                   url: /archives
                   weight: 3
