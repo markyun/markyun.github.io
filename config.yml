@@ -26,7 +26,7 @@ menu:
           url: /art
           weight: 2
         - name: Weekly
-          url: https://markyun.github.io/Weekly/
+          url: https://markyun.github.io/weekly/
           weight: 6
         - name: 标签
           url: /tags
@@ -125,7 +125,7 @@ languages:
                   url: /art
                   weight: 2
                 - name: Weekly
-                  url: https://markyun.github.io/Weekly/
+                  url: https://markyun.github.io/weekly/
                   weight: 6
                 - name: 归档
                   url: /archives
@@ -157,7 +157,7 @@ languages:
                   url: /art
                   weight: 2
                 - name: Weekly
-                  url: https://markyun.github.io/Weekly/
+                  url: https://markyun.github.io/weekly/
                   weight: 6
                 - name: Archive
                   url: /archives
