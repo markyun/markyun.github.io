@@ -1,67 +1,57 @@
-# Sample workflow for building and 发布 Hugo文章到 to GitHub Pages https://markyun.github.io/
+---
 name: Deploy Hugo site to Pages
-
 on:
-    # Runs on pushes targeting the default branch
-     push:
-       branches: ["master"]
-
-    # Allows you to run this workflow manually from the Actions tab
-    workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+  push:
+    branches:
+      - master
+  workflow_dispatch: null
 permissions:
-    contents: read
-    pages: write
-    id-token: write
-
-# Allow one concurrent deployment
+  contents: read
+  pages: write
+  id-token: write
 concurrency:
-    group: "pages"
-    cancel-in-progress: true
-
-# Default to bash
+  group: pages
+  cancel-in-progress: true
 defaults:
-    run:
-        shell: bash
-
+  run:
+    shell: bash
 jobs:
-    # Build job
-    build:
-        runs-on: ubuntu-20.04
-        env:
-            HUGO_VERSION: 0.99.0
-        steps:
-            - name: Install Hugo CLI
-              run: |
-                  wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb \
-                  && sudo dpkg -i ${{ runner.temp }}/hugo.deb
-            - name: Checkout
-              uses: actions/checkout@v2
-              with:
-                  submodules: true
-                  fetch-depth: 0
-            - name: Setup Pages
-              id: pages
-              uses: actions/configure-pages@v1
-            - name: Build with Hugo
-              run: |
-                  hugo \
-                    --minify \
-                    --baseURL ${{ steps.pages.outputs.base_url }}
-            - name: Upload artifact
-              uses: actions/upload-pages-artifact@v1
-              with:
-                  path: ./public
+  build:
+    runs-on: ubuntu-20.04
+    env:
+      HUGO_VERSION: 0.99.0
+    steps:
+      - name: Install Hugo CLI
+        run: >
+          wget -O ${{ runner.temp }}/hugo.deb
+          https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
+          \
 
-    # Deployment job
-    deploy:
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
-        runs-on: ubuntu-20.04
-        needs: build
-        steps:
-            - name: Deploy to GitHub Pages
-              id: deployment
-              uses: actions/deploy-pages@v1
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v1
+      - name: Build with Hugo
+        run: |
+          hugo \
+            --minify \
+            --baseURL ${{ steps.pages.outputs.base_url }}
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./public
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-20.04
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
