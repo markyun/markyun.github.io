@@ -75,7 +75,7 @@ params:
             enable: true
             repo: markyun/markyun.github.io
             repo_id: R_kgDOKyM4fA
-            category: General
+            category: Announcements
             category_id: DIC_kwDOKyM4fM4CbSGO
             mapping: pathname
             position: top
