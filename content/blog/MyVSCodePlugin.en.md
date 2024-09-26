@@ -1,5 +1,5 @@
 ---
-title: My VS Code Configuration
+title: 我的 VS Code 常用配置
 date: 2023-11-27 19:31:30
 tags: ["Extensions", "vscode", "alias and tsconfig"]
 series: ["vscode"]
@@ -9,62 +9,80 @@ featured: true
 ---
 
 
-## VS Code Extensions
+## 我安装的 VS Code 插件 (**Extensions**)
+
+
+### 快捷键
+
+    ctrl f：搜索
+    ctrl g：定位到某行
+    F12：跳转到函数定义
+    ctrl - #回到定义
+
+    alt + ↑ 向上移动一行；
+    alt + ↓ 向下移动一行
+
+    ctrl `: 打开内置shell
+    Shift + Alt +A 块区域注释
+    ctrl shift k：删除当前行
+    tab：填入自动补全内容
+
+### 配置
+
+    // 出现推荐值时，按下Tab键是否自动填入最佳推荐值
+    "editor.tabCompletion": "on",
 
 ### 常规类
 
-    > vscode-fileheader、
-    > Auto Close Tag,
-    > Auto Rename Tag ,
-    > CSSComb、
-    > Prettier 、
-    > CSSRem (px to rem & rpx & vw ),
-    > Remove Comments,
-    > Live Server,
-    > Color Highlight ,
-    > GitLens 代码编辑历史、
-    > Git History  历史记录并搜索提交、消息、分支、
-    > Import Cost（查看导入包的大小）、
-    > CSS PEEK（类名与样式关联）、
-    > Colorize  可视化 CSS 颜色
-    > TODO Highlight,
-    > Svg Preview,
-    > Excel Viewer,
-    > filesize、
-    > Open in Browser,
-    > toggle-upper-case、
-    > indent-rainbow（代码缩进高亮）、
-    > Better Comments  (Comment Highlighting)
+    vscode-fileheader、
+    Auto Close Tag、
+    Auto Rename Tag 、
+    CSSComb、
+    Prettier 、
+    CSSRem （px to rem & rpx & vw ）、
+    Remove Comments、
+    Live Server、
+    Color Highlight 、
+    GitLens 代码编辑历史、
+    Git History  历史记录并搜索提交、消息、分支、
+    Import Cost（查看导入包的大小）、
+    CSS PEEK（类名与样式关联）、
+    Colorize  可视化 CSS 颜色
+    indent-rainbow（代码缩进高亮）、
 
 
 ### 纠正类
 
-    > AutoCorrect   用于「自动纠正」或「检查并建议」文案、给 CJK（中文、日语、韩语）与英文混写的场景，补充正确的空格，同时尝试以安全的方式自动纠正标点符号
-    > Code Spell Checker（检测单词错误）、
-    > Bracket Pair Colorizer  括号高亮配对
-    > Error Lens
-
-
+    AutoCorrect   用于「自动纠正」或「检查并建议」文案 、给 CJK（中文、日语、韩语）与英文混写的场景，补充正确的空格，同时尝试以安全的方式自动纠正标点符号
+    Code Spell Checker（检测单词错误）、
+    Bracket Pair Colorizer  括号高亮配对
+    Error Lens
+    VSCode React Refactor （提取成函数）
 
 ### 工具类
 
-    > Turbo Console Log  无需手动添加日志。通过单击一个按钮添加控制台日志、
-    > Remove Comments  删除代码中的所有注释。
-    > Regex Previewer,
-    > CodeSnap（生成代码选中图片 Take beautiful screenshots of your code in VS Code!）、
-    > Markdown Preview Enhanced,
-    > Material  icons ,
-    > File Nesting Updater,
-    >
-
+    Turbo Console Log  无需手动添加日志。通过单击一个按钮添加控制台日志、
+    Remove Comments  删除代码中的所有注释。
+    Regex Previewer、
+    CodeSnap（生成代码选中图片 Take beautiful screenshots of your code in VS Code!）、
+    Markdown Preview Enhanced、
+    Material  icons 、
+    File Nesting Updater、
+    Better Comments  (Comment Highlighting)
+    Svg Preview、
+    Excel Viewer、
+    filesize、
+    Open in Browser、
+    toggle-upper-case、
 
 ### 主动提示
 
-    > Path Intellisense,
-    > cssModules、
-    > Parameter Hints（入参格式提示）、
-    > Quokka.js
-
+    Path Intellisense、
+    TODO Highlight、
+    ES7+ React/Redux/React-Native snippets  （语法提示）
+    cssModules、
+    Parameter Hints（ 入参格式提示 ）、
+    Quokka.js
 
 ### AI 类工具
 
@@ -80,16 +98,16 @@ featured: true
     > Peacock 打开多个 VS Code 实例显示不同颜色
 
 
-
-
 ## JSON Settings
+
 ```json
 /*
 * @Author: ASCII-ART
 * @Date: 2017-10-26 14:04:17
-* @Last Modified by: ASCII-ART
-* @Last Modified time: 2023-07-18 09:53:04
+ * @Last Modified by: markyun
+ * @Last Modified time: 2024-09-26 16:52:59
 */
+
 {
 
   "editor.multiCursorModifier": "ctrlCmd",
@@ -510,7 +528,7 @@ resolve: {
   },
 ```
 最后，如果插件编辑器的语言状态，都成功加载了对应的配置，就能正常工作了。
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1702005780118-d3891327-5acc-4e43-97f4-f83b73b53132.png)
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1702005780118-d3891327-5acc-4e43-97f4-f83b73b53132.png#averageHue=%23383739&clientId=u666fbd0b-50c6-4&from=paste&height=306&id=u3ed33181&originHeight=459&originWidth=859&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=47186&status=done&style=none&taskId=u10ecb9ee-1d23-4f48-b6a0-2330d68dad8&title=&width=572.6666666666666)
 
 
 ## 使用 .gitignore_global 忽略 .vscode 文件夹
@@ -561,8 +579,6 @@ git config --global core.excludesfile ~/.gitignore_global
 
 ```
 
-##
-
 ## 内置终端
 
 
@@ -570,7 +586,4 @@ git config --global core.excludesfile ~/.gitignore_global
 ```jsx
 printenv
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1698304214991-b1464bac-7230-4940-bf27-d3075af7e95c.png)
-可以轻松地将终端分成两边。我经常用一边运行开发服务器，用另一边执行随机的终端命令（git 命令、linting 命令、随机任务等）。超级方便。
-
-
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/203859/1698304214991-b1464bac-7230-4940-bf27-d3075af7e95c.png#averageHue=%23161514&clientId=u1af1eb05-a548-4&from=paste&height=879&id=u471e72e9&originHeight=1318&originWidth=1870&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=182436&status=done&style=none&taskId=u309e460b-bec0-47e9-9ee9-1e7a13fe74a&title=&width=1246.6666666666667)
