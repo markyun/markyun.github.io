@@ -32,6 +32,39 @@ featured: true
     // 出现推荐值时，按下Tab键是否自动填入最佳推荐值
     "editor.tabCompletion": "on",
 
+### ESlint 插件
+
+正常工作状态：
+
+1、有错误提示
+2、终端输出  ESLint server is running.
+3、tsconfig.json 文件读取正常（并且 对应的 .eslintrc.js 配置正确、规则文件读取正常）
+
+ .eslintrc.js 规则文件示例
+```
+
+  module.exports = {
+    extends: [require.resolve('@whalecloud/eslint-config/configurations/typescript')],
+    overrides: [
+      {
+        files: ['*.spec.ts', '*.spec.tsx'],
+        rules: {
+          '@typescript-eslint/no-explicit-any': ['off'],
+        },
+        env: {
+          jest: true,
+        },
+      },
+    ],
+  };
+  "dependencies": {
+      "typescript": "^5.5.4",
+      "@whalecloud/eslint-config": "^0.0.40-beta.11"
+  }
+
+
+```
+
 ### 常规类
 
     vscode-fileheader、

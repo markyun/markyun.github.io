@@ -16,11 +16,18 @@
   }
 }
 
+[data-dark-mode] .blog-single  h1{
+  background: linear-gradient(326deg, #adfbda 0, #35c3ff 30%, #fda399 50%, #76d880 70%, #ebf38b 90%, #adfbda 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .blog-single {
   position: relative;
   max-width: 80rem;
   margin: auto;
   padding: 1.5rem;
+
+
 
   .blog-toc {
     top: 4rem;

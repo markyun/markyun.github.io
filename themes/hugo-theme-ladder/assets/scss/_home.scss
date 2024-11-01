@@ -24,6 +24,9 @@
         margin-bottom: 0;
         font-size: 4.2rem;
         line-height: 4.6rem;
+        background: linear-gradient(190deg, #adfbda 0, #35c3ff 30%, #fda399 50%, #76d880 70%, #ebf38b 90%, #adfbda 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
 
         @media only screen and (max-width: 768px) {
           font-size: 2.2rem;
