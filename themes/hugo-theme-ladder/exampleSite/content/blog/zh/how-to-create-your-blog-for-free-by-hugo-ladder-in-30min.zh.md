@@ -209,7 +209,7 @@ taxonomies:
 
 ```markdown
 ---
-title: 
+title:
 date: {{ .Date }}
 tags: []
 series: []
@@ -292,7 +292,7 @@ params:
 每一次写文章建议填写的配置（也可以不填），文章开头有这个几个字段，分别代表着
 
 ```markdown
-title: 
+title:
 date: {{ .Date }}
 tags: []
 series: []
@@ -371,7 +371,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -389,8 +389,8 @@ jobs:
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        # If you're changing the branch from main, 
-        # also change the `main` in `refs/heads/main` 
+        # If you're changing the branch from main,
+        # also change the `main` in `refs/heads/main`
         # below accordingly.
         if: github.ref == 'refs/heads/main'
         with:

@@ -14,7 +14,7 @@ This article is the second in a series on how to create you blog by hugo ladder 
 
 ### why choose hugo
 
-Most websites today fall into two categories - dynamic websites and static websites. Dynamic websites are server-based(or serverless), which can return different content depending on the user. They rely on a content management system (CMS) or database for rendering. So you need to pay for server costs. 
+Most websites today fall into two categories - dynamic websites and static websites. Dynamic websites are server-based(or serverless), which can return different content depending on the user. They rely on a content management system (CMS) or database for rendering. So you need to pay for server costs.
 
 Static sites generally display the same content to all users. They use server-side rendering to serve HTML, CSS, and Javascript files, which use static site generators (SSG) technology to display the same content to all users. The advantages of a static site include speed, security and SEO. it is also easy to maintain and highly scalable. Since Static Site Generators (SSG) store an already compiled page on a CDN, they load much faster.
 
@@ -186,7 +186,7 @@ First we find the `default.md` file in the `archetypes` folder in the root direc
 
 ```markdown
 ---
-title: 
+title:
 date: {{ .Date }}
 tags: []
 series: []
@@ -214,7 +214,7 @@ Once created, you can use `hugo server -D` to build and run the blog and open `h
 
 ### multi language support
 
-First, we need to determine which language is the default language of the blog website. Is it multi-language support? For example, `defaultContentLanguage` needs to be set to `en` if the default language is English. If the default language is Chinese it is `zh`. 
+First, we need to determine which language is the default language of the blog website. Is it multi-language support? For example, `defaultContentLanguage` needs to be set to `en` if the default language is English. If the default language is Chinese it is `zh`.
 
 In addition, if you don't need multi-language support, set `params.options.enableMultiLang` to `false`, and delete the other language  configuration which below the `languages`.
 
@@ -257,7 +257,7 @@ New social icons can be added by modifying the configuration file, the `params.s
 If you create a new posts, it is recommended to fill the configuration which means:
 
 ```markdown
-title: 
+title:
 date: {{ .Date }}
 tags: []
 series: []
@@ -334,7 +334,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -352,8 +352,8 @@ jobs:
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        # If you're changing the branch from main, 
-        # also change the `main` in `refs/heads/main` 
+        # If you're changing the branch from main,
+        # also change the `main` in `refs/heads/main`
         # below accordingly.
         if: github.ref == 'refs/heads/main'
         with:
