@@ -43,6 +43,12 @@ jobs:
       - name: Build with Hugo
         run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}"
 
+      - name: Check public directory exists
+        run: |
+          if [ ! -d "./public" ]; then
+            echo "public directory does not exist!" && exit 1
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
