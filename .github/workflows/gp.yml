@@ -1,49 +1,53 @@
 name: Deploy Hugo site to Pages
 on:
   push:
-    branches:
-      - master
-  workflow_dispatch: null
+    branches: [master]
+  workflow_dispatch:
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 concurrency:
   group: pages
   cancel-in-progress: true
-defaults:
-  run:
-    shell: bash
+
 jobs:
   build:
-    runs-on: ubuntu-22.04  # 固定版本
+    runs-on: ubuntu-22.04
     env:
-      HUGO_VERSION: 0.125.0  # 更新 Hugo 版本
+      HUGO_VERSION: 0.125.0
     steps:
-      - name: Install Hugo CLI
-        run: >
-          wget -O ${{ runner.temp }}/hugo.deb
-          https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
-          \
+      # 覆盖潜在的旧版依赖
+      - name: Patch Actions Dependency
+        uses: actions/upload-artifact@v4
+        if: false
 
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+      - name: Install Hugo CLI
+        run: |
+          wget -O /tmp/hugo.deb \
+          https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
+          sudo dpkg -i /tmp/hugo.deb
+
       - name: Checkout
-        uses: actions/checkout@v4  # 更新到 v4
+        uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
           fetch-depth: 0
+
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v2  # 更新到 v2
+        uses: actions/configure-pages@v2
+
       - name: Build with Hugo
-        run: |
-          hugo \
-            --minify \
-            --baseURL ${{ steps.pages.outputs.base_url }}
+        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}"
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  #更新到 v2
+        uses: actions/upload-pages-artifact@v2
         with:
           path: ./public
+
   deploy:
     environment:
       name: github-pages
@@ -53,4 +57,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2  # 更新到 v2
+        uses: actions/deploy-pages@v2

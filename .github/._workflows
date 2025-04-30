@@ -1,34 +1,33 @@
-name: generate github pages to gh-pages branch
+name: Deploy to GitHub Pages
 
 on:
-    push:
-        branches:
-            - master ## Set a branch name to trigger deployment
+  push:
+    branches:
+      - master
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                  submodules: true # Fetch Hugo themes (true OR recursive)
-                  fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+  deploy:
+    runs-on: ubuntu-22.04  # 固定使用22.04版本
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # 升级到v4版本
+        with:
+          submodules: recursive  # 改为更明确的recursive
+          fetch-depth: 0
 
-            - name: Setup Hugo
-              uses: peaceiris/actions-hugo@v2
-              with:
-                  hugo-version: "latest"
-                  extended: true
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "latest"
+          extended: true
 
-            - name: Build
-              run: hugo --minify
+      - name: Build site
+        run: hugo --minify
 
-            - name: Deploy
-              uses: peaceiris/actions-gh-pages@v3
-              # If you're changing the branch from master,
-              # also change the `master` in `refs/heads/master`
-              # below accordingly.
-              if: github.ref == 'refs/heads/master'
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: ./public
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages  # 明确指定目标分支
