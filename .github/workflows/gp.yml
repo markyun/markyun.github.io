@@ -1,4 +1,3 @@
----
 name: Deploy Hugo site to Pages
 on:
   push:
@@ -17,9 +16,9 @@ defaults:
     shell: bash
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # 固定版本
     env:
-      HUGO_VERSION: 0.99.0
+      HUGO_VERSION: 0.125.0  # 更新 Hugo 版本
     steps:
       - name: Install Hugo CLI
         run: >
@@ -29,29 +28,29 @@ jobs:
 
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4  # 更新到 v4
         with:
           submodules: true
           fetch-depth: 0
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v1
+        uses: actions/configure-pages@v2  # 更新到 v2
       - name: Build with Hugo
         run: |
           hugo \
             --minify \
             --baseURL ${{ steps.pages.outputs.base_url }}
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2  #更新到 v2
         with:
           path: ./public
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2  # 更新到 v2
