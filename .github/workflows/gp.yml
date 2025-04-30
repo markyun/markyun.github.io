@@ -22,7 +22,7 @@ jobs:
       # 覆盖潜在的旧版依赖
       - name: Patch Actions Dependency
         uses: actions/upload-artifact@v4
-        if: false
+        if: true
 
       - name: Install Hugo CLI
         run: |
@@ -44,7 +44,7 @@ jobs:
         run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}"
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
@@ -57,4 +57,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v3
