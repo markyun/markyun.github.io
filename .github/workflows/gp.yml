@@ -19,10 +19,6 @@ jobs:
     env:
       HUGO_VERSION: 0.125.0
     steps:
-      # 覆盖潜在的旧版依赖
-      - name: Patch Actions Dependency
-        uses: actions/upload-artifact@v4
-        if: true
 
       - name: Install Hugo CLI
         run: |
