@@ -40,7 +40,7 @@
             {{ end -}}
 
             {{ if .Site.Params.options.enableMultiLang -}}
-            {{ if .Site.IsMultiLingual }}
+            {{ if hugo.IsMultilingual }}
             {{ $node := . }}
             {{ .Scratch.Set "separator" true }}
             {{ range (default .Site.Home.AllTranslations .Translations) }}

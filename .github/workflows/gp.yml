@@ -41,6 +41,8 @@ jobs:
         uses: actions/configure-pages@v2
 
       - name: Build with Hugo
+        env:
+          HUGO_ENV: production
         run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}"
 
       - name: Check public directory exists

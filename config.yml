@@ -6,19 +6,103 @@ licenselink: "https://github.com/LICENSE"
 description: "ASCII-ART Blog"
 homepage: "https://markyun.github.io"
 ignoreErrors: ["error-remote-getjson"]
+ignoreLogs: ['warning-goldmark-raw-html']
 defaultContentLanguage: "zh"
 googleAnalytics: G-GCQ46F04MN
-paginate: 10
+pagination:
+  pagerSize: 10
 enableEmoji: true
-# Hugo 会自动提取文章的前 70 个字符作为摘要
 hasCJKLanguage: true
 summaryLength: 70
 copyright: "2023 ASCII-ART All rights reserved"
-Author:
+# Author信息移至params.author中
+menu:
+  main:
+    - name: 文章
+      url: /blog
+      weight: 1
+    - name: 生活
+      url: /art
+      weight: 2
+    - name: Weekly
+      url: https://markyun.github.io/weekly/
+      weight: 6
+    - name: 标签
+      url: /tags
+      weight: 3
+    - name: 归档
+      url: /archives
+      weight: 4
+    # - name: 专题
+    #   url: /series
+    #   weight: 5
+    # - name: 留言板
+    #   url: /guestbook
+    #   weight: 5
+    # - name: 统计
+    #   url: https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli
+    #   weight: 5
+params:
+  brand: HOME
+  avatarURL: /images/avatar.png
+  author:
     name: "ASCII-ART"
     email: "asciiart007@gmail.com"
-menu:
-    main:
+  authorDescription: ASCII-ART blog
+  info: ASCII-ART 保持领先所需的见解
+  favicon: /images/avatar.png
+  options:
+    showDarkMode: true
+    enableImgZooming: true
+    enableMultiLang: true
+    showMetaTags: true
+  darkModeTheme: data-dark-mode
+  sponsors:
+    title: Sponsors
+    description: Support me by becoming a sponsor
+    wechat:
+      enable: false
+    alipay:
+      enable: false
+  comments:
+    giscus:
+      enable: true
+      repo: markyun/markyun.github.io
+      repo_id: R_kgDOKyM4fA
+      category: Announcements
+      category_id: DIC_kwDOKyM4fM4CbSGO
+      mapping: pathname
+      position: top
+      lang: "zh-CN"
+    utteranc:
+      enable: false
+      repo: markyun/blog-comments
+      issueTerm: pathname
+  analytics:
+    google:
+      enable: false
+      SiteVerificationTag: evbsgYmh-ir7LJcg2hg_RrXDlQmFIWh643Y9v4DPvF0
+    umami:
+      enable: false
+      website_id: 2320eaa6-a90b-471c-b6ca-e79dadde8c4c
+      url: https://umami-ochre-nu.vercel.app/hugo-ladder.js
+  social:
+    - name: GitHub
+      pre: >-
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+      url: "https://github.com/markyun"
+    - name: Analytics
+      pre: >-
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+      url: "https://umami-ochre-nu.vercel.app/share/R1lHz7QY/hugo-ladder-exampleSite"
+languages:
+  zh:
+    languageName: 中
+    author: ASCII-ART
+    authorDescription: ASCII-ART 保持领先所需的见解
+    info: 记录自己的日常，基础能力决定了下限，思想素养决定了上限，而经验技巧则影响着程序猿生涯的体验。
+    menu:
+      main:
         - name: 文章
           url: /blog
           weight: 1
@@ -28,150 +112,34 @@ menu:
         - name: Weekly
           url: https://markyun.github.io/weekly/
           weight: 6
-        - name: 标签
-          url: /tags
-          weight: 3
         - name: 归档
           url: /archives
+          weight: 3
+        - name: 标签
+          url: /tags
           weight: 4
-        # - name: 专题
-        #   url: /series
-        #   weight: 5
-        - name: 留言板
-          url: /guestbook
-          weight: 5
-        # - name: 统计
-        #   url: https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli
-        #   weight: 5
-params:
-    brand: HOME
-    avatarURL: /images/avatar.png
+  en:
+    languageName: EN
     author: ASCII-ART
-    authorDescription: ASCII-ART blog
-    info: ASCII-ART 保持领先所需的见解
-    favicon: /images/avatar.png
-    options:
-        showDarkMode: true
-        enableImgZooming: true
-        enableMultiLang: true
-        showMetaTags: true
-    darkModeTheme: data-dark-mode
-    sponsors:
-        title: Sponsors
-        description: Support me by becoming a sponsor
-        # buymeaCoffee:
-        #     enable: true
-        #     url: https://www.buymeacoffee.com/iguangzhengli
-        #     buttom_api: https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=iguangzhengli&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff
-        #     qr: https://storage.guangzhengli.com/images/buymeacoffee_sponsors.png
-        wechat:
-            enable: false
-            # qr: https://storage.guangzhengli.com/images/alipay_sponsors.jpeg
-        alipay:
-            enable: false
-            # qr: https://storage.guangzhengli.com/images/weixin_sponsors.jpeg
-    comments:
-        giscus:
-            enable: true
-            repo: markyun/markyun.github.io
-            repo_id: R_kgDOKyM4fA
-            category: Announcements
-            category_id: DIC_kwDOKyM4fM4CbSGO
-            mapping: pathname
-            position: top
-            lang: "zh-CN" # pick a language from https://github.com/giscus/giscus/tree/main/locales
-            # utteranc 和 giscus  只能二选一 enable: false 需将另外的一个 enable 设置成 false。
-        utteranc:
-            enable: false
-            repo: markyun/blog-comments
-            issueTerm: pathname
-    analytics:
-        google:
-            enable: false
-            SiteVerificationTag: evbsgYmh-ir7LJcg2hg_RrXDlQmFIWh643Y9v4DPvF0
-        umami:
-            enable: false
-            website_id: 2320eaa6-a90b-471c-b6ca-e79dadde8c4c
-            url: https://umami-ochre-nu.vercel.app/hugo-ladder.js
-    guestbook:
-        title: Guestbook
-        description: Leave a comment below. It could be anything –- question, appreciation, information, or even humor.
-    social:
-        - name: GitHub
-          pre: >-
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-          url: "https://github.com/markyun"
-        - name: Analytics
-          pre: >-
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-          url: "https://umami-ochre-nu.vercel.app/share/R1lHz7QY/hugo-ladder-exampleSite"
-# languages: "zh"
-languages:
-    zh:
-      # params:
-        languageName: 中
-        author: ASCII-ART
-        authorDescription: ASCII-ART 保持领先所需的见解
-        info: 记录自己的日常，基础能力决定了下限，思想素养决定了上限，而经验技巧则影响着程序猿生涯的体验。
-        guestbook:
-            title: 留言板
-            description: 您的评论，会让该网站更精彩！
-        menu:
-            main:
-                - name: 文章
-                  url: /blog
-                  weight: 1
-                - name: 生活
-                  url: /art
-                  weight: 2
-                - name: Weekly
-                  url: https://markyun.github.io/weekly/
-                  weight: 6
-                - name: 归档
-                  url: /archives
-                  weight: 3
-                - name: 标签
-                  url: /tags
-                  weight: 4
-                - name: 留言板
-                  url: /guestbook
-                  weight: 5
-                # - name: 统计
-                #   url: https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli
-                #   weight: 5
-    en:
-      # params:
-        languageName: EN
-        author: ASCII-ART
-        authorDescription: ASCII-ART The insights you need to keep ahead
-        info: Record your thoughts and enhance your influence
-        guestbook:
-            title: Message Board
-            description: Your comment will make the website more exciting!
-        menu:
-            main:
-                - name: Blog
-                  url: /blog
-                  weight: 1
-                - name: Art
-                  url: /art
-                  weight: 2
-                - name: Weekly
-                  url: https://markyun.github.io/weekly/
-                  weight: 6
-                - name: Archive
-                  url: /archives
-                  weight: 3
-                - name: Tags
-                  url: /tags
-                  weight: 4
-                - name: Guest
-                  url: /guestbook
-                  weight: 5
-                # - name: Monitor
-                #   url: https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli
-                #   weight: 6
-
+    authorDescription: ASCII-ART The insights you need to keep ahead
+    info: Record your thoughts and enhance your influence
+    menu:
+      main:
+        - name: Blog
+          url: /blog
+          weight: 1
+        - name: Art
+          url: /art
+          weight: 2
+        - name: Weekly
+          url: https://markyun.github.io/weekly/
+          weight: 6
+        - name: Archive
+          url: /archives
+          weight: 3
+        - name: Tags
+          url: /tags
+          weight: 4
 taxonomies:
-    tag: tags
-    series: series
+  tag: tags
+  series: series
